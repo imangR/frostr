@@ -1,79 +1,69 @@
-get_observations <- function(
-  client_id,
-  sources,
-  reference_time,
-  elements,
-  maxage = NULL,
-  limit = NULL,
-  timeoffsets = NULL,
-  timeresolutions = NULL,
-  timeseriesids = NULL,
-  performancecategories = NULL,
-  exposurecategories = NULL,
-  qualities = NULL,
-  levels = NULL,
-  includeextra = NULL,
-  fields = NULL) {
+get_observations <-
+  function(
+    client_id,
+    sources,
+    reference_time,
+    elements,
+    maxage = NULL,
+    limit = NULL,
+    time_offsets = NULL,
+    time_resolutions = NULL,
+    time_series_ids = NULL,
+    performance_categories = NULL,
+    exposure_categories = NULL,
+    qualities = NULL,
+    levels = NULL,
+    include_extra = NULL,
+    fields = NULL
+  ) {
 
-  endpoint <-
+    input_args <-
+      list(
+        "client_id"             = client_id,
+        "sources"               = sources,
+        "referencetime"         = reference_time,
+        "elements"              = elements,
+        "maxage"                = maxage,
+        "limit"                 = limit,
+        "timeoffsets"           = time_offsets,
+        "timeresolutions"       = time_resolutions,
+        "timeseriesids"         = time_series_ids,
+        "performancecategories" = performance_categories,
+        "exposurecategories"    = exposure_categories,
+        "qualities"             = qualities,
+        "levels"                = levels,
+        "includeextra"          = include_extra,
+        "fields"                = fields
+        )
+
+  # Define URL to get data from ---------------------------------------------
+
+    url <-
     paste0(
       "https://", client_id, "@frost.met.no/observations/v0.jsonld",
       collapse = NULL
       )
 
-  query <-
-    paste0(
-      "sources=", sources,
-      "&referencetime=", reference_time,
-      "&elements=", elements,
-      collapse = NULL
-      )
+    for (i in seq_along(input_args)[-1]) {
+      if (!is.null(input_args[[i]])) {
+        url <-
+          urltools::param_set(url,
+                              key = names(input_args[i]),
+                              value = input_args[[i]])
+      }
+    }
 
-  url <- paste0(endpoint, query, collapse = NULL)
+# Get data ----------------------------------------------------------------
 
+    get_request <-
+      jsonlite::fromJSON(URLencode(url), flatten = TRUE)
 
-}
-# Define andpoint and parameters
-endpoint <- paste0("https://", client_id, "@frost.met.no/observations/v0.jsonld", collapse=NULL)
-sources <- 'SN18700,SN90450'
-elements <- 'mean(air_temperature P1D),sum(precipitation_amount P1D),mean(wind_speed P1D)'
-referenceTime <- '2010-04-01/2010-04-03'
-# Build the URL to Frost
-url <- paste0(
-  endpoint, "?",
-  "sources=", sources,
-  "&referencetime=", referenceTime,
-  "&elements=", elements,
-  collapse=NULL
-)
+    get_data <-
+      get_request$data
 
-# Issue an HTTP GET request and extract JSON data
-xs <- try(fromJSON(URLencode(url),flatten=T))
+# Coerce data into a data frame -------------------------------------------
 
-# Check if the request worked, print out any errors
-if (class(xs) != 'try-error') {
-  print("Data retrieved from frost.met.no!")
-  data <- xs$data
-} else {
-  print("Error: the data retrieval was not successful!")
-}
+    weather_df <-
+      unnest(get_data, observations)
 
-# This will return a Dataframe with all of the observations in a table format
-df <- data.frame()
-for (i in 1:length(data$observations)) {
-  row <- data$observations[[i]]
-  row$sourceId <- data$sourceId[[i]]
-  row$referenceTime <- data$referenceTime[[i]]
-  df <- rbind(df, row)
-}
-
-head(df)
-
-# These additional columns will be kept
-columns <- c("sourceId","referenceTime","elementId","value","unit","timeOffset")
-df2 <- df[columns]
-
-# Convert the time value to something R understands
-df2$referenceTime <- as.Date(df2$referenceTime)
-
-head(df2)
+  }
