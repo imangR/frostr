@@ -14,56 +14,45 @@ get_observations <-
     qualities = NULL,
     levels = NULL,
     include_extra = NULL,
-    fields = NULL
+    fields = NULL,
+    return_response = FALSE
   ) {
 
     input_args <-
       list(
-        "client_id"             = client_id,
-        "sources"               = sources,
-        "referencetime"         = reference_time,
-        "elements"              = elements,
-        "maxage"                = maxage,
-        "limit"                 = limit,
-        "timeoffsets"           = time_offsets,
-        "timeresolutions"       = time_resolutions,
-        "timeseriesids"         = time_series_ids,
-        "performancecategories" = performance_categories,
-        "exposurecategories"    = exposure_categories,
-        "qualities"             = qualities,
-        "levels"                = levels,
-        "includeextra"          = include_extra,
-        "fields"                = fields
+        sources               = frost_csl(sources),
+        referencetime         = reference_time,
+        elements              = frost_csl(elements),
+        maxage                = maxage,
+        limit                 = limit,
+        timeoffsets           = time_offsets,
+        timeresolutions       = frost_csl(time_resolutions),
+        timeseriesids         = frost_csl(time_series_ids),
+        performancecategories = frost_csl(performance_categories),
+        exposurecategories    = frost_csl(exposure_categories),
+        qualities             = frost_csl(qualities),
+        levels                = frost_csl(levels),
+        includeextra          = include_extra,
+        fields                = frost_csl(fields)
         )
 
-  # Define URL to get data from ---------------------------------------------
-
     url <-
-    paste0(
-      "https://", client_id, "@frost.met.no/observations/v0.jsonld",
-      collapse = NULL
-      )
+    paste0("https://", client_id, "@frost.met.no/observations/v0.jsonld",
+           collapse = NULL)
 
-    for (i in seq_along(input_args)[-1]) {
-      if (!is.null(input_args[[i]])) {
-        url <-
-          urltools::param_set(url,
-                              key = names(input_args[i]),
-                              value = input_args[[i]])
-      }
-    }
+    r <- httr::GET(url, query = input_args)
 
-# Get data ----------------------------------------------------------------
+    stop_for_status(r)
+    stop_for_type(r)
 
-    get_request <-
-      jsonlite::fromJSON(URLencode(url), flatten = TRUE)
+    if (return_response) return(r)
 
-    get_data <-
-      get_request$data
+    r_content <- httr::content(r, as = "text", encoding = "UTF-8")
+    r_json <- jsonlite::fromJSON(r_content, flatten = TRUE)
 
-# Coerce data into a data frame -------------------------------------------
+    r_data <- tibble::as_tibble(r_json[["data"]])
 
-    weather_df <-
-      unnest(get_data, observations)
+    obs_df <- tidyr::unnest(r_data, observations)
+    obs_df <- tibble::as_tibble(obs_df)
 
   }
