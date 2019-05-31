@@ -50,8 +50,8 @@ get_elements <-
 
     test_url <- modify_url(paste0("https://", client_id, "@frost.met.no"), path = "elements/v0.jsonld?lang=en-US")
 
-    stop_for_status(r)
-    stop_for_type(r)
+    frost_stop_for_error(r)
+    frost_stop_for_type(r)
 
     if (return_response) return(r)
 

@@ -46,8 +46,8 @@ get_sources <-
 
     r <- httr::GET(url, query = input_args)
 
-    httr::stop_for_status(r)
-    stop_for_type(r)
+    frost_stop_for_error(r)
+    frost_stop_for_type(r)
 
     if (return_response) return(r)
 
