@@ -86,5 +86,17 @@ depending on the value set for the \code{return_response} argument.
   the Frost API.
 }
 \examples{
+# Get daily data for temperature, rain, and wind speed for 2018
+client.id <- "<YOUR CLIENT ID>"
+sources <- "SN18700"
+reference.time <- "2018-01-01/2018-12-31"
+elements <- c("mean(air_temperature P1D)",
+              "sum(precipitation_amount P1D)",
+              "mean(wind_speed P1D)")
+
+observations_df <- get_observations(client_id = client.id,
+                                    sources = sources,
+                                    reference_time = reference.time,
+                                    elements)
 
 }
