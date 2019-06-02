@@ -1,71 +1,102 @@
 #' @title Get metadata about the weather and climate elements that are
 #' defined for use in the Frost API
 #'
-#' @description \code{get_locations()} retrieves metadata about locations
-#' in the Frost API. Use the optional input arguments to filter the set of
-#' locations returned in the response.
+#' @description \code{get_elements()} retrieves metadata about weather and
+#' climate elements defined for use in the Frost API. The function requires a
+#' client ID for the \code{client_id} argument at minimum. Use the optional
+#' input arguments to filter the set of elements returned in the response.
+#' The optional function arguments default to NULL, which translates to no
+#' filter on the returned response from the Frost API.
 #'
 #' @usage
-#' get_sources(client_id, ...)
+#' get_elements(client_id, ...)
 #'
-#' get_sources(client_id,
-#'             names = NULL,
-#'             geometry = NULL,
-#'             fields = NULL,
-#'             return_response = FALSE)
+#' get_elements(client_id,
+#'              ids = NULL,
+#'              names = NULL,
+#'              descriptions = NULL,
+#'              units = NULL,
+#'              codeTables= NULL,
+#'              statuses = NULL,
+#'              calculationMethod = NULL,
+#'              categories = NULL,
+#'              timeOffsets = NULL,
+#'              sensorLevels = NULL,
+#'              oldElementCodes = NULL,
+#'              oldUnits = NULL,
+#'              cfStandardNames = NULL,
+#'              cfCellMethods = NULL,
+#'              cfUnits = NULL,
+#'              cfVersions = NULL,
+#'              fields = NULL,
+#'              return_response = FALSE)
 #'
 #' @param client_id A string. The client ID to use to send requests to the
 #' Frost API.
 #'
-#' @param ids
+#' @param ids A character vector. The element IDs to get metadata for.
 #'
-#' @param names
+#' @param names A character vector. The element names to get metadata for.
 #'
-#' @param descriptions
+#' @param descriptions A character vector. The descriptions to get metadata
+#' for.
 #'
-#' @param units
+#' @param units A character vector. The units to get metadata for.
 #'
-#' @param codeTables
+#' @param codeTables A character vector. The code tables to get metadata for.
 #'
-#' @param statuses
+#' @param statuses A character vector. The statuses to get metadata for.
 #'
-#' @param calculationMethod
+#' @param calculationMethod A string. The calculation method as a JSON filter.
+#' Supports the following keys: baseNames, methods, innerMethods, periods,
+#' innerPeriods, tresholds, methodDescriptions, innerMethodDescriptions,
+#' methodUnits, and innerMethodUnits.
 #'
-#' @param categories
+#' @param categories A character vector. The categories to get metadata for.
 #'
-#' @param timeOffsets
+#' @param timeOffsets A character vector. The time offsets to get metadata for.
 #'
-#' @param sensorLevels
+#' @param sensorLevels A string. The sensor levels to get metadata
+#' for as a JSON filter. Supports the following keys: levelTypes, units,
+#' defaultValues, and values.
 #'
-#' @param oldElementCodes
+#' @param oldElementCodes A character vector. The old MET Norway element codes
+#' to get metadata for.
 #'
-#' @param oldUnits
+#' @param oldUnits A character vector. The old MET Norway units to get
+#' metadata for.
 #'
-#' @param cfStandardNames
+#' @param cfStandardNames A character vector. The CF standard names to get
+#' metadata for.
 #'
-#' @param cfCellMethods
+#' @param cfCellMethods A character vector. The CF cell methods to get
+#' metadata for.
 #'
-#' @param cfUnits
+#' @param cfUnits A character vector. The CF units to get metadata for.
 #'
-#' @param cfVersions
+#' @param cfVersions A character vector. The CF versions to get metadata for.
 #'
-#' @param fields
+#' @param fields A character vector. A vector of the fields that should be
+#' present in the response. If not set, then all fields will be retrieved.
 #'
-#' @param return_response
-#' @return The function returns either a data frame of sources or the
-#' response of the GET request for the sources, depending on the value
-#' set for the \code{return_response} argument.
+#' @param return_response A logical. If set to \code{TRUE}, then the function
+#' returns the response from the GET request. If set to \code{FALSE} (default),
+#' then the function returns a dataframe of the content in the response to the
+#' GET request.
+#'
+#' @return The function returns either a data frame of weather and climate
+#' elements, or the response of the GET request for location resource in
+#' the Frost API, depending on the value set for the \code{return_response}
+#' argument.
 #'
 #' @examples
 #' client.id <- "<YOUR CLIENT ID>"
 #'
-#' # Get data for all sources
-#' sources <- get_sources(client_id = client.id)
+#' # Get data for all elements
+#' elements <- get_elements(client_id = client.id)
 #'
-#' # Get data for sources in Norway
-#' sources_norway <- get_sources(client.id = client.id,
-#'                               country = "NO")
-#'
+#' @export get_elements
+
 get_elements <-
   function(
     client_id,
@@ -110,7 +141,7 @@ get_elements <-
         fields            = frost_csl(fields)
       )
 
-    frost_control_args(input_args = input_args, func == "get_elements")
+    frost_control_args(input_args = input_args, func = "get_elements")
 
     url <-
       paste0("https://", client_id, "@frost.met.no/elements/v0.jsonld?lang=en-US",
@@ -120,7 +151,7 @@ get_elements <-
 
     test_url <- modify_url(paste0("https://", client_id, "@frost.met.no"), path = "elements/v0.jsonld?lang=en-US")
 
-    httr::stop_for_error(r)
+    httr::stop_for_status(r)
     frost_stop_for_type(r)
 
     if (return_response) return(r)

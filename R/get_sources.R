@@ -1,7 +1,11 @@
-#' @title Get data for source entities (i.e. stations) in the Frost API
+#' @title Get metadata for source entities defined in the Frost API
 #'
-#' @description \code{get_sources()} retrieves data about source entities
-#' (i.e. stations) that observe weather data.
+#' @description \code{get_sources()} retrieves metadata about source entities
+#' (i.e. stations) defined for use in the Frost API. The function requires a
+#' client ID for the \code{client_id} argument at minimum. Use the optional input
+#' arguments to filter the set of source entities returned in the response. The
+#' optional function arguments default to NULL, which translates to no filter
+#' on the returned response from the Frost API.
 #'
 #' @usage
 #' get_sources(client_id, ...)
@@ -29,7 +33,7 @@
 #' Frost API.
 #'
 #' @param ids A character vector. The Frost API source ID(s) that you want
-#' metadata for the data sources.
+#' metadata for.
 #'
 #' @param types A string. The type of Frost API source that you want
 #' metadata for. Must be set to either "SensorSystem", "InterpolatedDataset",
@@ -40,8 +44,8 @@
 #' "POLYGON(...)" using well-known text representation for geometry (WKT).
 #'
 #' @param nearest_max_count A string. The maximum number of sources returned
-#' when using "nearest(POINT(...))" for \code{geometry}. Defaults to 1 if
-#' not specified.
+#' when using "nearest(POINT(...))" for the \code{geometry} argument. Defaults
+#' to 1 if not specified.
 #'
 #' @param valid_time A string. The time interval for which the sources have
 #' been or still are valid (or applicable). Specify as "<date>/<date>" or
@@ -49,43 +53,28 @@
 #' Defaults to "now" if not specified, which returns only currently valid
 #' sources.
 #'
-#' @param name A string. If specified, the request will return a response
-#' filtered on sources with matching names to that specified in \code{name}.
+#' @param name A string. The data source name to get metadata for.
 #'
-#' @param country A string. If specified, the request will return a response
-#' filtered on sources with matching country or country codes to that specified
-#' in \code{country}.
+#' @param country A string. The country name or country code to get metadata
+#' for.
 #'
-#' @param county A string. If specified, the request will return a response
-#' filtered on sources with matching county or county ID to that specified in
-#' \code{county}.
+#' @param county A string. The county name or county ID to get metadata for.
 #'
-#' @param municipality A string. If specified, the request will return a
-#' response filtered on sources with matching municipality or municipality
-#' ID to that specified in \code{municipality}.
+#' @param municipality A string. The municipality to get metadata for.
 #'
-#' @param wmo_id A string. If specified, the request will return a response
-#' filtered on sources with matching wmo ID to that specified in \code{wmoid}.
+#' @param wmo_id A string. The WMO ID to get metadata for.
 #'
-#' @param station_holder A string. If specified, the request will return a
-#' response filtered on sources with matching station holder names to that
-#' specified in \code{station_holder}.
+#' @param station_holder A string. The station holder name to get metadata
+#' for.
 #'
-#' @param external_ids A character vector. If specified, the request will
-#' return a response filtered on sources with matching external ids to that
-#' specified in \code{station_holder}.
+#' @param external_ids A character vector. The external ID to get metadata
+#' for.
 #'
-#' @param icao_code A string. If specified, the request will return a response
-#' filtered on sources with matching ICAO codes to that specified in
-#' \code{icao_code}.
+#' @param icao_code A string. The ICAO code to get metadata for.
 #'
-#' @param ship_code A string. If specified, the request will return a response
-#' filtered on sources with matching ship codes to that specified in
-#' \code{ship_code}.
+#' @param ship_code A string. The ship code to get metadata for.
 #'
-#' @param wigos_id A string. If specified, the request will return a response
-#' filtered on sources with matching WIGOS ids to that specified in
-#' \code{wigos_id}.
+#' @param wigos_id A string. The WIGOS ID to get metadata for.
 #'
 #' @param fields A character vector. A vector of the fields that should be
 #' present in the response. If not set, then all fields will be retrieved.
@@ -96,8 +85,8 @@
 #' GET request.
 #'
 #' @return The function returns either a data frame with metadata about sources
-#' or the response of the GET request for the sources, depending on the value
-#' set for the \code{return_response} argument.
+#' or the response of the GET request for the sources resource in the Frost
+#' API, depending on the value set for the \code{return_response} argument.
 #'
 #' @examples
 #' client.id <- "<YOUR CLIENT ID>"
@@ -109,6 +98,7 @@
 #' sources_norway <- get_sources(client.id = client.id,
 #'                               country = "NO")
 #'
+#' @export get_sources
 
 get_sources <-
   function(
@@ -152,7 +142,7 @@ get_sources <-
         fields          = frost_csl(fields)
       )
 
-    frost_control_sources(input_args = input_args)
+    frost_control_sources(input_args = input_args, func = "get_sources")
 
     url <-
       paste0("https://", client_id, "@frost.met.no/sources/v0.jsonld",
