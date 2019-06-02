@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_observations.R
 \name{get_observations}
 \alias{get_observations}
-\title{Get historical weather observations from the Frost API}
+\title{Get observation data from the Frost API}
 \usage{
 get_observations(client_id, sources, reference_time, elements, ...)
 
@@ -27,60 +27,65 @@ get_observations(client_id,
 \item{client_id}{A string. The client ID to use to send requests to the Frost
 API.}
 
-\item{sources}{A character vector. The IDs of the data sources (i.e.
-stations) that observed the weather data.}
+\item{sources}{A character vector. The station IDs of the data sources
+to get observations for. For example, "SN18700" is the station ID for
+"Blindern". The full list of station IDs can be retrieved with
+\link{\code{get_sources()}}.}
 
 \item{reference_time}{A string. The time range to get observations for in
 either extended ISO-8601 format or the single word "latest".}
 
 \item{elements}{A character vector. The elements to get observations for.
-Available elements can be retrieved with the \code{get_elements()}
-function.}
+The full list of elements can be retrieved with the
+\link{\code{get_elements()}}.}
 
 \item{maxage}{A string. The maximum observation age as an ISO-8601 period,
-such as "P1D". This parameter is only applicable when \code{reference_time
-= "latest"}. The default value is "PT3H".}
+e.g. \code{"P1D"}. This parameter is only applicable when \code{reference_time
+= "latest"}. Defaults to "PT3H".}
 
 \item{limit}{A string or a positive integer. The maximum number of
 observation times to be returned for each combination of source and
 element, counting from the most recent time. This parameter is only
 applicable when \code{reference_time = "latest"}. Set \code{limit = "all"}
-to get all available times or a positive integer. The default value is 1.}
+to get all available times or a positive integer. Defaults to 1.}
 
 \item{time_offsets}{A character vector. The time offsets to get observations
-for provided as a vector of ISO-8601 periods. If the parameter is not set,
-then the response (i.e. output) is not filtered on time offsets.}
+for provided as a vector of ISO-8601 periods, e.g. \code{c("PT6H", "PT18H")}.
+If the parameter is not set, then the response (i.e. output) is not filtered
+on time offsets.}
 
 \item{time_resolutions}{A character vector. The time resolutions to get
-observations for provided as a vector of ISO-8601 periods. If the parameter
-is not set, then the response (i.e. output) is not filtered on time
-resolutions.}
+observations for provided as a vector of ISO-8601 periods e.g.
+\code{c("PT6H", "PT18H")}. If the parameter is not set, then the response
+(i.e. output) is not filtered on time resolutions.}
 
 \item{time_series_ids}{A numeric vector. The internal time series IDs to get
-observations for as a vector of integers. If the parameter is not set, then
-the response (i.e. output) is not filtered on internal time series ID.}
+observations for as a vector of integers, e.g. c(0, 1). If the parameter is
+not set, then the response (i.e. output) is not filtered on internal time
+series ID.}
 
 \item{performance_categories}{A character vector. The performance categories
-to get observations for as a vector of letters, e.g. "A", "C". If the
-parameter is not set, then the response (i.e. output) is not filtered on
+to get observations for as a vector of letters, e.g. \code{c("A", "C")}. If
+the parameter is not set, then the response (i.e. output) is not filtered on
 internal time series ID.}
 
 \item{exposure_categories}{A numeric vector. The exposure categories to get
-observations for as a vector of integers. If the parameter is not set, then
-the response (i.e. output) is not filtered on exposure categories.}
+observations for as a vector of integers, e.g. \code{c(1, 2)}. If the
+parameter is not set, then the response (i.e. output) is not filtered on
+exposure categories.}
 
-\item{qualities}{A numeric vector. The qualities to get observations for as a
-vector of integers. If the parameter is not set, then the response (i.e.
-output) is not filtered on quality.}
+\item{qualities}{A numeric vector. The qualities to get observations for as
+a vector of integers, e.g. \code{c(1, 2)}. If the parameter is not set,
+then the response (i.e. output) is not filtered on quality.}
 
 \item{levels}{A numeric vector. The sensor levels to get observations for as
-a vector of integers. If the parameter is not set, then the response (i.e.
-output) is not filtered on sensor level.}
+a vector of integers, e.g. \code{c(1, 2, 10, 20)}. If the parameter is not
+set, then the response (i.e. output) is not filtered on sensor level.}
 
-\item{include_extra}{A logical or integer. If this parameter is set to 1
-or \code{TRUE}, and extra data is available, then this data is included
-in the response. Extra data currently consists of the original observation
-value and the 16-character control info.}
+\item{include_extra}{An integer. If this parameter is set to 1, and extra
+data is available, then this data is included in the response. Extra data
+currently consists of the original observation value and the 16-character
+control info.}
 
 \item{fields}{A character vector. Fields to include in the response (i.e.
 output). If this parameter is specified, then only these fields are
@@ -98,8 +103,13 @@ observations or the response of the GET request for the observations,
 depending on the value set for the \code{return_response} argument.
 }
 \description{
-\code{get_observations()} retrieves historical weather data from
-  the Frost API.
+\code{get_observations()} retrieves historical weather data
+from the Frost API. This is the core resource for retrieving actual
+observation data from MET Norway's data storage systems. The function
+requires input for \code{client_id}, \code{sources}, \code{reference_time},
+and \code{elements}. The other function arguments are optional, and default
+to \code{NULL}, meaning that the response from the API is not filtered
+on these parameters.
 }
 \examples{
 # Get daily data for temperature, rain, and wind speed for 2018

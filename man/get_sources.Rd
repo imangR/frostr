@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_sources.R
 \name{get_sources}
 \alias{get_sources}
-\title{Get data on stations that perform observations}
+\title{Get metadata for source entities defined in the Frost API}
 \usage{
 get_sources(client_id, ...)
 
@@ -30,7 +30,7 @@ get_sources(client_id,
 Frost API.}
 
 \item{ids}{A character vector. The Frost API source ID(s) that you want
-metadata for the data sources.}
+metadata for.}
 
 \item{types}{A string. The type of Frost API source that you want
 metadata for. Must be set to either "SensorSystem", "InterpolatedDataset",
@@ -41,8 +41,8 @@ geometry. Geometries are specified as either "nearest(POINT(...))" or
 "POLYGON(...)" using well-known text representation for geometry (WKT).}
 
 \item{nearest_max_count}{A string. The maximum number of sources returned
-when using "nearest(POINT(...))" for \code{geometry}. Defaults to 1 if
-not specified.}
+when using "nearest(POINT(...))" for the \code{geometry} argument. Defaults
+to 1 if not specified.}
 
 \item{valid_time}{A string. The time interval for which the sources have
 been or still are valid (or applicable). Specify as "<date>/<date>" or
@@ -50,40 +50,26 @@ been or still are valid (or applicable). Specify as "<date>/<date>" or
 Defaults to "now" if not specified, which returns only currently valid
 sources.}
 
-\item{name}{A string. If specified, the request will return a response
-filtered on sources with matching names to that specified in \code{name}.}
+\item{name}{A string. The data source name to get metadata for.}
 
-\item{country}{A string. If specified, the request will return a response
-filtered on sources with matching country or country codes to that specified
-in \code{country}.}
+\item{country}{A string. The country name or country code to get metadata
+for.}
 
-\item{county}{A string. If specified, the request will return a response
-filtered on sources with matching county or county ID to that specified in
-\code{county}.}
+\item{county}{A string. The county name or county ID to get metadata for.}
 
-\item{municipality}{A string. If specified, the request will return a
-response filtered on sources with matching municipality or municipality
-ID to that specified in \code{municipality}.}
+\item{municipality}{A string. The municipality to get metadata for.}
 
-\item{station_holder}{A string. If specified, the request will return a
-response filtered on sources with matching station holder names to that
-specified in \code{station_holder}.}
+\item{station_holder}{A string. The station holder name to get metadata
+for.}
 
-\item{external_ids}{A character vector. If specified, the request will
-return a response filtered on sources with matching external ids to that
-specified in \code{station_holder}.}
+\item{external_ids}{A character vector. The external ID to get metadata
+for.}
 
-\item{icao_code}{A string. If specified, the request will return a response
-filtered on sources with matching ICAO codes to that specified in
-\code{icao_code}.}
+\item{icao_code}{A string. The ICAO code to get metadata for.}
 
-\item{ship_code}{A string. If specified, the request will return a response
-filtered on sources with matching ship codes to that specified in
-\code{ship_code}.}
+\item{ship_code}{A string. The ship code to get metadata for.}
 
-\item{wigos_id}{A string. If specified, the request will return a response
-filtered on sources with matching WIGOS ids to that specified in
-\code{wigos_id}.}
+\item{wigos_id}{A string. The WIGOS ID to get metadata for.}
 
 \item{fields}{A character vector. A vector of the fields that should be
 present in the response. If not set, then all fields will be retrieved.}
@@ -93,19 +79,20 @@ returns the response from the GET request. If set to \code{FALSE} (default),
 then the function returns a dataframe of the content in the response to the
 GET request.}
 
-\item{wmo_id}{A string. If specified, the request will return a response
-filtered on sources with matching wmo ID to that specified in \code{wmoid}.}
+\item{wmo_id}{A string. The WMO ID to get metadata for.}
 }
 \value{
-The function returns either a data frame of sources or the
-response of the GET request for the sources, depending on the value
-set for the \code{return_response} argument.
+The function returns either a data frame with metadata about sources
+or the response of the GET request for the sources resource in the Frost
+API, depending on the value set for the \code{return_response} argument.
 }
 \description{
-\code{get_sources()} retrieves data about stations
-(i.e. source entities) that observe weather data. The station ids can
-be used in \code{get_observations()}, for the `sources` argument, to get
-observational data for only the station(s) of interest.
+\code{get_sources()} retrieves metadata about source entities
+(i.e. stations) defined for use in the Frost API. The function requires a
+client ID for the \code{client_id} argument at minimum. Use the optional input
+arguments to filter the set of source entities returned in the response. The
+optional function arguments default to NULL, which translates to no filter
+on the returned response from the Frost API.
 }
 \examples{
 client.id <- "<YOUR CLIENT ID>"
