@@ -3,8 +3,25 @@
 #' @description \code{get_observations()} retrieves historical weather data from
 #'   the Frost API.
 #'
-#' @usage \code{get_observations(client_id, sources, reference_time, elements,
-#'   ...)}
+#' @usage
+#' get_observations(client_id, sources, reference_time, elements, ...)
+#'
+#' get_observations(client_id,
+#'                  sources,
+#'                  reference_time,
+#'                  elements,
+#'                  maxage = NULL,
+#'                  limit = NULL,
+#'                  time_offsets = NULL,
+#'                  time_resolutions = NULL,
+#'                  time_series_ids = NULL,
+#'                  performance_categories = NULL,
+#'                  exposure_categories = NULL,
+#'                  qualities = NULL,
+#'                  levels = NULL,
+#'                  include_extra = NULL,
+#'                  fields = NULL,
+#'                  return_response = FALSE)
 #'
 #' @param client_id A string. The client ID to use to send requests to the Frost
 #'   API.

@@ -1,3 +1,71 @@
+#' @title Get metadata about the weather and climate elements that are
+#' defined for use in the Frost API
+#'
+#' @description \code{get_locations()} retrieves metadata about locations
+#' in the Frost API. Use the optional input arguments to filter the set of
+#' locations returned in the response.
+#'
+#' @usage
+#' get_sources(client_id, ...)
+#'
+#' get_sources(client_id,
+#'             names = NULL,
+#'             geometry = NULL,
+#'             fields = NULL,
+#'             return_response = FALSE)
+#'
+#' @param client_id A string. The client ID to use to send requests to the
+#' Frost API.
+#'
+#' @param ids
+#'
+#' @param names
+#'
+#' @param descriptions
+#'
+#' @param units
+#'
+#' @param codeTables
+#'
+#' @param statuses
+#'
+#' @param calculationMethod
+#'
+#' @param categories
+#'
+#' @param timeOffsets
+#'
+#' @param sensorLevels
+#'
+#' @param oldElementCodes
+#'
+#' @param oldUnits
+#'
+#' @param cfStandardNames
+#'
+#' @param cfCellMethods
+#'
+#' @param cfUnits
+#'
+#' @param cfVersions
+#'
+#' @param fields
+#'
+#' @param return_response
+#' @return The function returns either a data frame of sources or the
+#' response of the GET request for the sources, depending on the value
+#' set for the \code{return_response} argument.
+#'
+#' @examples
+#' client.id <- "<YOUR CLIENT ID>"
+#'
+#' # Get data for all sources
+#' sources <- get_sources(client_id = client.id)
+#'
+#' # Get data for sources in Norway
+#' sources_norway <- get_sources(client.id = client.id,
+#'                               country = "NO")
+#'
 get_elements <-
   function(
     client_id,
@@ -42,6 +110,8 @@ get_elements <-
         fields            = frost_csl(fields)
       )
 
+    frost_control_args(input_args = input_args, func == "get_elements")
+
     url <-
       paste0("https://", client_id, "@frost.met.no/elements/v0.jsonld?lang=en-US",
              collapse = NULL)
@@ -50,7 +120,7 @@ get_elements <-
 
     test_url <- modify_url(paste0("https://", client_id, "@frost.met.no"), path = "elements/v0.jsonld?lang=en-US")
 
-    frost_stop_for_error(r)
+    httr::stop_for_error(r)
     frost_stop_for_type(r)
 
     if (return_response) return(r)

@@ -31,6 +31,8 @@ frost_control_elements <- function() {
 
 frost_control_sources <- function() {
 
+  # ids ----
+
   if (typeof(ids) != "character") {
 
     stop("`ids` must be a vector of type `character`. You have insert a vector ",
@@ -39,14 +41,77 @@ frost_control_sources <- function() {
 
   }
 
+  # types ----
+
   if (typeof(types) != "character") {
 
     stop("`types` must be a vector of type `character`. You have insert a vector ",
-         "of type ", "`", typeof(types), "`",
+         "of type ", "`", typeof(types), "`.",
+         call. = FALSE)
+
+  } else if (length(types) != 1) {
+
+    stop("The length of `types` must be equal to 1. You have insert a vector ",
+         "of length ", length(types), ".",
          call. = FALSE)
 
   }
 
+  # geometry ----
+
+  if (typeof(geometry) != "character") {
+
+    stop("`geometry` must be a vector of type `character`. You have insert a vector ",
+         "of type ", "`", typeof(geometry), "`.",
+         call. = FALSE)
+
+  } else if (length(geometry) != 1) {
+
+    stop("The length of `geometry` must be equal to 1. You have insert vector ",
+         "of length ", length(geometry), ".",
+         call. = FALSE)
+
+  }
+
+  # nearest_max_count ----
+
+  if (typeof(nearest_max_count) != "double" | typeof(nearest_max_count) != "integer") {
+
+    stop("`nearest_max_count` must be a vector of type `double` or `integer`. ",
+         "You have insert a vector of type ", "`", typeof(nearest_max_count), "`.",
+         call. = FALSE)
+
+  } else if(length(nearest_max_count) != 1) {
+
+    stop("The length of `nearest_max_count` must be equal to 1. You have insert vector ",
+         "of length ", length(nearest_max_count), ".",
+         call. = FALSE)
+
+  }
+
+  # valid_time ----
+
+  if (typeof(valid_time) != "character") {
+
+    stop("`valid_time` must be a vector of type `character`. You have insert a vector ",
+         "of type ", "`", typeof(validtime), "`.",
+         call. = FALSE)
+
+  } else if (length(valid_time) != 1) {
+
+    stop("The length of `valid_time` must be equal to 1. You have insert vector ",
+         "of length ", length(validtime), ".",
+         call. = FALSE)
+
+  }
+
+  if (typeof(name) != "character") {
+
+    stop("`valid_time` must be a vector of type `character`. You have insert a vector ",
+         "of type ", "`", typeof(validtime), "`.",
+         call. = FALSE)
+
+  }
 }
 
 # FROST STOP FOR TYPE ----
