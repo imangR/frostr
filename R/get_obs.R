@@ -1,32 +1,32 @@
-#' @title Get observation data from the Frost API
+#' @title Get observation data from the "observation" resource
 #'
-#' @description \code{get_observations()} retrieves historical weather data
+#' @description \code{get_obs()} retrieves historical weather data
 #' from the Frost API. This is the core resource for retrieving actual
 #' observation data from MET Norway's data storage systems. The function
 #' requires input for \code{client_id}, \code{sources}, \code{reference_time},
 #' and \code{elements}. The other function arguments are optional, and default
-#' to \code{NULL}, meaning that the response from the API is not filtered
-#' on these parameters.
+#' to \code{NULL}, which means that the response from the API is not
+#' filtered on these parameters.
 #'
 #' @usage
-#' get_observations(client_id, sources, reference_time, elements, ...)
+#' get_obs(client_id, sources, reference_time, elements, ...)
 #'
-#' get_observations(client_id,
-#'                  sources,
-#'                  reference_time,
-#'                  elements,
-#'                  maxage = NULL,
-#'                  limit = NULL,
-#'                  time_offsets = NULL,
-#'                  time_resolutions = NULL,
-#'                  time_series_ids = NULL,
-#'                  performance_categories = NULL,
-#'                  exposure_categories = NULL,
-#'                  qualities = NULL,
-#'                  levels = NULL,
-#'                  include_extra = NULL,
-#'                  fields = NULL,
-#'                  return_response = FALSE)
+#' get_obs(client_id,
+#'         sources,
+#'         reference_time,
+#'         elements,
+#'         maxage = NULL,
+#'         limit = NULL,
+#'         time_offsets = NULL,
+#'         time_resolutions = NULL,
+#'         time_series_ids = NULL,
+#'         performance_categories = NULL,
+#'         exposure_categories = NULL,
+#'         qualities = NULL,
+#'         levels = NULL,
+#'         include_extra = NULL,
+#'         fields = NULL,
+#'         return_response = FALSE)
 #'
 #' @param client_id A string. The client ID to use to send requests to the Frost
 #' API.
@@ -55,36 +55,25 @@
 #'
 #' @param time_offsets A character vector. The time offsets to get observations
 #' for provided as a vector of ISO-8601 periods, e.g. \code{c("PT6H", "PT18H")}.
-#' If the parameter is not set, then the response (i.e. output) is not filtered
-#' on time offsets.
 #'
 #' @param time_resolutions A character vector. The time resolutions to get
 #' observations for provided as a vector of ISO-8601 periods e.g.
-#' \code{c("PT6H", "PT18H")}. If the parameter is not set, then the response
-#' (i.e. output) is not filtered on time resolutions.
+#' \code{c("PT6H", "PT18H")}.
 #'
 #' @param time_series_ids A numeric vector. The internal time series IDs to get
-#' observations for as a vector of integers, e.g. c(0, 1). If the parameter is
-#' not set, then the response (i.e. output) is not filtered on internal time
-#' series ID.
+#' observations for as a vector of integers, e.g. c(0, 1).
 #'
 #' @param performance_categories A character vector. The performance categories
-#' to get observations for as a vector of letters, e.g. \code{c("A", "C")}. If
-#' the parameter is not set, then the response (i.e. output) is not filtered on
-#' internal time series ID.
+#' to get observations for as a vector of letters, e.g. \code{c("A", "C")}.
 #'
 #' @param exposure_categories A numeric vector. The exposure categories to get
-#' observations for as a vector of integers, e.g. \code{c(1, 2)}. If the
-#' parameter is not set, then the response (i.e. output) is not filtered on
-#' exposure categories.
+#' observations for as a vector of integers, e.g. \code{c(1, 2)}.
 #'
 #' @param qualities A numeric vector. The qualities to get observations for as
-#' a vector of integers, e.g. \code{c(1, 2)}. If the parameter is not set,
-#' then the response (i.e. output) is not filtered on quality.
+#' a vector of integers, e.g. \code{c(1, 2)}.
 #'
 #' @param levels A numeric vector. The sensor levels to get observations for as
-#' a vector of integers, e.g. \code{c(1, 2, 10, 20)}. If the parameter is not
-#' set, then the response (i.e. output) is not filtered on sensor level.
+#' a vector of integers, e.g. \code{c(1, 2, 10, 20)}.
 #'
 #' @param include_extra An integer. If this parameter is set to 1, and extra
 #' data is available, then this data is included in the response. Extra data
@@ -125,9 +114,9 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom tibble as_tibble
 #' @importFrom tidyr unnest
-#' @export get_observations
+#' @export get_obs
 
-get_observations <-
+get_obs <-
   function(
     client_id,
     sources,
@@ -154,7 +143,7 @@ get_observations <-
         elements              = frost_csl(elements),
         maxage                = maxage,
         limit                 = limit,
-        timeoffsets           = time_offsets,
+        timeoffsets           = frost_csl(time_offsets),
         timeresolutions       = frost_csl(time_resolutions),
         timeseriesids         = frost_csl(time_series_ids),
         performancecategories = frost_csl(performance_categories),
@@ -165,13 +154,15 @@ get_observations <-
         fields                = frost_csl(fields)
         )
 
-    frost_control_args(input_args = input_args, func = "get_observations")
+    frost_control_args(input_args = input_args, func = "get_obs")
 
     url <-
     paste0("https://", client_id, "@frost.met.no/observations/v0.jsonld",
            collapse = NULL)
 
-    r <- httr::GET(url, query = input_args)
+    frostr_ua <- httr::user_agent("https://github.com/PersianCatsLikeToMeow/frostr")
+
+    r <- httr::GET(url, query = input_args, frostr_ua)
 
     httr::stop_for_status(r)
     frost_stop_for_type(r)

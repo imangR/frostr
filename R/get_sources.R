@@ -2,10 +2,12 @@
 #'
 #' @description \code{get_sources()} retrieves metadata about source entities
 #' (i.e. stations) defined for use in the Frost API. The function requires a
-#' client ID for the \code{client_id} argument at minimum. Use the optional input
-#' arguments to filter the set of source entities returned in the response. The
-#' optional function arguments default to NULL, which translates to no filter
-#' on the returned response from the Frost API.
+#' client ID for the \code{client_id} argument at minimum. The other function
+#' arguments are optional, and default to \code{NULL}, which means that the
+#' response from the API is not filtered on these parameters.
+#'
+#' NB: At the time of writing (2019-06-08), the Frost API "sources" resource
+#' only returns country names in Norwegian.
 #'
 #' @usage
 #' get_sources(client_id, ...)
@@ -148,7 +150,9 @@ get_sources <-
       paste0("https://", client_id, "@frost.met.no/sources/v0.jsonld",
              collapse = NULL)
 
-    r <- httr::GET(url, query = input_args)
+    frostr_ua <- httr::user_agent("https://github.com/PersianCatsLikeToMeow/frostr")
+
+    r <- httr::GET(url, query = input_args, frostr_ua)
 
     httr::stop_for_status(r)
     frost_stop_for_type(r)

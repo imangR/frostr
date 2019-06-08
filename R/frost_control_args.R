@@ -1,6 +1,6 @@
 frost_control_args <- function(input_args, func) {
 
-  if (func == "get_observations") {
+  if (func == "get_obs") {
 
     input_args_ctrl <-
       list(
@@ -72,6 +72,42 @@ frost_control_args <- function(input_args, func) {
         cfUnits           = list(type = "character"),
         cfVersions        = list(type = "character"),
         fields            = list(type = "character")
+      )
+
+  } else if (func == "get_obs_timeseries") {
+
+    input_args_ctrl <-
+      list(
+        sources               = list(type = "character"),
+        referencetime         = list(type = "character", max_length = 1),
+        elements              = list(type = "character"),
+        timeoffsets           = list(type = "character"),
+        timeresolutions       = list(type = "character"),
+        timeseriesids         = list(type = c("double", "integer")),
+        performancecategories = list(type = "character"),
+        exposurecategories    = list(type = c("double", "integer")),
+        levels                = list(type = c("double", "integer")),
+        levelTypes            = list(type = c("character")),
+        levelUnits            = list(type = "character"),
+        includeextra          = list(type = c("double", "integer")),
+        fields                = list(type = "character")
+      )
+
+  } else if (func == "get_obs_qualitycodes") {
+
+    input_args_ctrl <-
+      list(
+        fields = list(type = "character"),
+        lang   = list(type = "character", max_length = 1)
+      )
+
+  } else if (func == "get_element_codetables") {
+
+    input_args_ctrl <-
+      list(
+        ids    = list(type = "character"),
+        fields = list(type = "character"),
+        lang   = list(type = "character", max_length = 1)
       )
 
   } else {

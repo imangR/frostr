@@ -149,8 +149,6 @@ get_elements <-
 
     r <- httr::GET(url, query = input_args)
 
-    test_url <- modify_url(paste0("https://", client_id, "@frost.met.no"), path = "elements/v0.jsonld?lang=en-US")
-
     httr::stop_for_status(r)
     frost_stop_for_type(r)
 

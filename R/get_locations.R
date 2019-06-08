@@ -44,6 +44,12 @@
 #' # Get data for all sources
 #' locations <- get_locations(client_id = client.id)
 #'
+#' @importFrom httr GET
+#' @importFrom httr content
+#' @importFrom httr stop_for_status
+#' @importFrom httr user_agent
+#' @importFrom jsonlite fromJSON
+#' @importFrom tibble as_tibble
 #' @export get_locations
 
 get_locations <-
@@ -67,6 +73,8 @@ get_locations <-
     url <-
       paste0("https://", client_id, "@frost.met.no/locations/v0.jsonld",
              collapse = NULL)
+
+    frostr_ua <- httr::user_agent("https://github.com/PersianCatsLikeToMeow/frostr")
 
     r <- httr::GET(url, query = input_args)
 
