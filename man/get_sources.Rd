@@ -89,10 +89,12 @@ API, depending on the value set for the \code{return_response} argument.
 \description{
 \code{get_sources()} retrieves metadata about source entities
 (i.e. stations) defined for use in the Frost API. The function requires a
-client ID for the \code{client_id} argument at minimum. Use the optional input
-arguments to filter the set of source entities returned in the response. The
-optional function arguments default to NULL, which translates to no filter
-on the returned response from the Frost API.
+client ID for the \code{client_id} argument at minimum. The other function
+arguments are optional, and default to \code{NULL}, which means that the
+response from the API is not filtered on these parameters.
+
+NB: At the time of writing (2019-06-08), The Frost API only returns country
+names in Norwegian.
 }
 \examples{
 client.id <- "<YOUR CLIENT ID>"
