@@ -1,6 +1,6 @@
-#' @title Get observation data from the "observation" resource
+#' @title Get weather observations from the "observation" resource in the Frost API
 #'
-#' @description \code{get_obs()} retrieves historical weather data
+#' @description \code{get_observations()} retrieves historical weather data
 #' from the Frost API. This is the core resource for retrieving actual
 #' observation data from MET Norway's data storage systems. The function
 #' requires input for \code{client_id}, \code{sources}, \code{reference_time},
@@ -9,24 +9,24 @@
 #' filtered on these parameters.
 #'
 #' @usage
-#' get_obs(client_id, sources, reference_time, elements, ...)
+#' get_observations(client_id, sources, reference_time, elements, ...)
 #'
-#' get_obs(client_id,
-#'         sources,
-#'         reference_time,
-#'         elements,
-#'         maxage = NULL,
-#'         limit = NULL,
-#'         time_offsets = NULL,
-#'         time_resolutions = NULL,
-#'         time_series_ids = NULL,
-#'         performance_categories = NULL,
-#'         exposure_categories = NULL,
-#'         qualities = NULL,
-#'         levels = NULL,
-#'         include_extra = NULL,
-#'         fields = NULL,
-#'         return_response = FALSE)
+#' get_observations(client_id,
+#'                  sources,
+#'                  reference_time,
+#'                  elements,
+#'                  maxage = NULL,
+#'                  limit = NULL,
+#'                  time_offsets = NULL,
+#'                  time_resolutions = NULL,
+#'                  time_series_ids = NULL,
+#'                  performance_categories = NULL,
+#'                  exposure_categories = NULL,
+#'                  qualities = NULL,
+#'                  levels = NULL,
+#'                  include_extra = NULL,
+#'                  fields = NULL,
+#'                  return_response = FALSE)
 #'
 #' @param client_id A string. The client ID to use to send requests to the Frost
 #' API.
@@ -86,37 +86,31 @@
 #' returned in the response.
 #'
 #' @param return_response A logical. If set to \code{TRUE}, then the function
-#' returns the response from the GET request. If set to \code{FALSE}, then the
-#' function returns a dataframe of the content in the response to the GET
-#' request.
+#' returns the response from the GET request. If set to \code{FALSE} (default),
+#' then the function returns a tibble (data frame) of the content in the
+#' response.
 #'
 #' @return The function returns either a data frame of historical weather
-#' observations or the response of the GET request for the observations,
-#' depending on the value set for the \code{return_response} argument.
+#' observations, or the response of the GET request, depending on the
+#' boolean value set for \code{return_response}.
 #'
 #' @examples
-#' # Get daily data for temperature, rain, and wind speed for 2018
 #' client.id <- "<YOUR CLIENT ID>"
+#'
+#' # Get daily data for temperature, rain, and wind speed for 2018
 #' sources <- "SN18700"
 #' reference.time <- "2018-01-01/2018-12-31"
 #' elements <- c("mean(air_temperature P1D)",
 #'               "sum(precipitation_amount P1D)",
 #'               "mean(wind_speed P1D)")
 #'
-#' observations_df <- get_observations(client_id = client.id,
-#'                                     sources = sources,
-#'                                     reference_time = reference.time,
-#'                                     elements)
+#' obs_df <- get_observations(client_id = client.id,
+#'                            sources = sources,
+#'                            reference_time = reference.time,
+#'                            elements)
 #'
-#' @importFrom httr GET
-#' @importFrom httr content
-#' @importFrom httr stop_for_status
-#' @importFrom jsonlite fromJSON
-#' @importFrom tibble as_tibble
-#' @importFrom tidyr unnest
-#' @export get_obs
 
-get_obs <-
+get_observations <-
   function(
     client_id,
     sources,
@@ -154,7 +148,7 @@ get_obs <-
         fields                = frost_csl(fields)
         )
 
-    frost_control_args(input_args = input_args, func = "get_obs")
+    frost_control_args(input_args = input_args, func = "get_observations")
 
     url <-
     paste0("https://", client_id, "@frost.met.no/observations/v0.jsonld",

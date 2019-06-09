@@ -1,11 +1,10 @@
 #' @title Get metadata for the location names defined in the Frost API
 #'
 #' @description \code{get_locations()} retrieves metadata about location names
-#' defined for use in the Frost API. The function requires a client ID for the
-#' \code{client_id} argument at minimum. Use the optional input arguments to
-#' filter the set of location names returned in the response. The optional
-#' function arguments default to NULL, which translates to no filter on the returned
-#' response from the Frost API.
+#' defined for use in the Frost API. The function requires an
+#' input for \code{client_id}. The other function arguments are optional, and
+#' default to \code{NULL}, which means that the response from the API is not
+#' filtered on these parameters.
 #'
 #' @usage
 #' get_locations(client_id, ...)
@@ -26,31 +25,26 @@
 #' specified geometry. Geometries are specified as either "nearest(POINT(...))"
 #' or "POLYGON(...)" using well-known text representation for geometry (WKT).
 #'
-#' @param fields A character vector. A vector of the fields that should be
-#' present in the response. If not set, then all fields will be retrieved.
+#' @param fields A character vector. Fields to include in the response (i.e.
+#' output). If this parameter is specified, then only these fields are
+#' returned in the response. If not specified, then all fields will be
+#' returned in the response.
 #'
 #' @param return_response A logical. If set to \code{TRUE}, then the function
 #' returns the response from the GET request. If set to \code{FALSE} (default),
-#' then the function returns a dataframe of the content in the response to the
-#' GET request.
+#' then the function returns a tibble (data frame) of the content in the
+#' response.
 #'
-#' @return The function returns either a data frame of locations, or the
-#' response of the GET request for location resource in the Frost API,
-#' depending on the value set for the \code{return_response} argument.
+#' @return The function returns either a data frame with metadata about
+#' location names, or the response of the GET request, depending on the
+#' boolean value set for \code{return_response}.
 #'
-#' @examples
+#' @examples´
 #' client.id <- "<YOUR CLIENT ID>"
 #'
-#' # Get data for all sources
-#' locations <- get_locations(client_id = client.id)
+#' # Get all location names
+#' locations_df <- get_locations(client_id = client.id)
 #'
-#' @importFrom httr GET
-#' @importFrom httr content
-#' @importFrom httr stop_for_status
-#' @importFrom httr user_agent
-#' @importFrom jsonlite fromJSON
-#' @importFrom tibble as_tibble
-#' @export get_locations
 
 get_locations <-
   function(

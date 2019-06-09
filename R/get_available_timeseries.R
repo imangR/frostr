@@ -1,29 +1,29 @@
 #' @title Get metadata on available time series in the "observation" resource
 #'
-#' @description \code{get_obs_timeseries()} retrieves metadata on available
+#' @description \code{get_available_timeseries()} retrieves metadata on available
 #' time series that you can get from the Frost API "observations" resource
-#' with \code{get_obs()}. The function requires input for \code{client_id}
-#' and \code{sources}. The other function arguments are optional, and default
-#' to \code{NULL}, which means that the response from the API is not
+#' with \link{\code{get_observations()}}. The function requires input for
+#' \code{client_id} and \code{sources}. The other function arguments are optional,
+#' and default to \code{NULL}, which means that the response from the API is not
 #' filtered on these parameters.
 #'
 #' @usage
-#' get_obs_timeseries(client_id, sources, ...)
+#' get_available_timeseries(client_id, sources, ...)
 #'
-#' get_obs_timeseries(client_id,
-#'                    sources,
-#'                    reference_time = NULL,
-#'                    elements = NULL,
-#'                    time_offsets = NULL,
-#'                    time_resolutions = NULL,
-#'                    time_series_ids = NULL,
-#'                    performance_categories = NULL,
-#'                    exposure_categories = NULL,
-#'                    levels = NULL,
-#'                    level_types = NULL,
-#'                    level_units = NULL,
-#'                    fields = NULL,
-#'                    return_response = FALSE)
+#' get_available_timeseries(client_id,
+#'                          sources,
+#'                          reference_time = NULL,
+#'                          elements = NULL,
+#'                          time_offsets = NULL,
+#'                          time_resolutions = NULL,
+#'                          time_series_ids = NULL,
+#'                          performance_categories = NULL,
+#'                          exposure_categories = NULL,
+#'                          levels = NULL,
+#'                          level_types = NULL,
+#'                          level_units = NULL,
+#'                          fields = NULL,
+#'                          return_response = FALSE)
 #'
 #' @param client_id A string. The client ID to use to send requests to the
 #' Frost API.
@@ -71,30 +71,26 @@
 #' returned in the response.
 #'
 #' @param return_response A logical. If set to \code{TRUE}, then the function
-#' returns the response from the GET request. If set to \code{FALSE}, then the
-#' function returns a dataframe of the content in the response to the GET
-#' request.
+#' returns the response from the GET request. If set to \code{FALSE} (default),
+#' then the function returns a tibble (data frame) of the content in the
+#' response.
 #'
-#' @return The function returns either a data frame of historical weather
-#' observations or the response of the GET request for the observations,
-#' depending on the value set for the \code{return_response} argument.
+#' @return The function returns either a data frame with metadata about
+#' available time series, or the response of the GET request, depending
+#' on the boolean value set for \code{return_response}.
 #'
 #' @examples
+#' client.id <- "<YOUR CLIENT ID>"
+#'
 #' # Get metadata on available time series for Blindern station (with station
 #' # ID SN18700)
-#' client.id <- "<YOUR CLIENT ID>"
 #' sources <- "SN18700"
 #'
-#' obs_timeseries <- get_obs_timeseries(client_id = client.id, sources = sources)
+#' obs_timeseries <- get_available_timeseries(client_id = client.id,
+#'                                            sources = sources)
 #'
-#' @importFrom httr GET
-#' @importFrom httr content
-#' @importFrom httr stop_for_status
-#' @importFrom jsonlite fromJSON
-#' @importFrom tibble as_tibble
-#' @export get_obs_timeseries
 
-get_obs_timeseries <-
+get_available_timeseries <-
   function(
     client_id,
     sources,
@@ -128,7 +124,7 @@ get_obs_timeseries <-
         fields                = frost_csl(fields)
       )
 
-    frost_control_args(input_args = input_args, func = "get_obs_timeseries")
+    frost_control_args(input_args = input_args, func = "get_available_timeseries")
 
     url <-
       paste0("https://", client_id,

@@ -1,29 +1,17 @@
-#' @title Get metadata about existing quality flags for observations
+#' @title Get metadata on existing quality flags in the "observation" resource
 #'
-#' @description \code{get_obs_qualitycodes()} provides a data frame with all
+#' @description \code{get_available_qualitycodes()} provides a data frame with all
 #' possible detail values given the quality service. The function requires
 #' input for \code{client_id}. The other function arguments are optional, and default
 #' to \code{NULL}, which means that the response from the API is not
 #' filtered on these parameters.
 #'
 #' @usage
-#' get_obs(client_id, sources, reference_time, elements, ...)
+#' get_available_qualitycodes(client_id, ...)
 #'
 #' get_obs(client_id,
-#'         sources,
-#'         reference_time,
-#'         elements,
-#'         maxage = NULL,
-#'         limit = NULL,
-#'         time_offsets = NULL,
-#'         time_resolutions = NULL,
-#'         time_series_ids = NULL,
-#'         performance_categories = NULL,
-#'         exposure_categories = NULL,
-#'         qualities = NULL,
-#'         levels = NULL,
-#'         include_extra = NULL,
 #'         fields = NULL,
+#'         language = NULL,
 #'         return_response = FALSE)
 #'
 #' @param client_id A string. The client ID to use to send requests to the Frost
@@ -39,28 +27,27 @@
 #' options are "en-US" (default), "nb-NO" (Norwegian, Bokmål), and "nn-NO"
 #' (Norwegian, Nynorsk).
 #'
-#'
 #' @param return_response A logical. If set to \code{TRUE}, then the function
-#' returns the response from the GET request. If set to \code{FALSE}, then the
-#' function returns a dataframe of the content in the response to the GET
-#' request.
+#' returns the response from the GET request. If set to \code{FALSE} (default),
+#' then the function returns a tibble (data frame) of the content in the
+#' response.
 #'
-#' @return The function returns either a data frame of historical weather
-#' observations or the response of the GET request for the observations,
-#' depending on the value set for the \code{return_response} argument.
+#' @return The function returns either a data frame with metadata about
+#' quality flags, or the response of the GET request, depending
+#' on the boolean value set for \code{return_response}.
 #'
 #' @examples
 #' client.id <- "<YOUR CLIENT ID>"
 #'
 #' # Get metadata for quality codes
-#' qualitycodes_df <- get_obs_qualitycodes(client_id = client.id)
+#' qualitycodes <- get_available_qualitycodes(client_id = client.id)
 #'
 #' # Get the summarized metadata for quality codes
-#' summarized_df <- get_obs_qualitycodes(client_id = client.id,
-#'                                       fields = "summarized")
+#' summarized_df <- get_available_qualitycodes(client_id = client.id,
+#'                                             fields = "summarized")
 #'
 
-get_obs_qualitycodes <-
+get_available_qualitycodes <-
   function(
     client_id,
     fields = NULL,
@@ -74,7 +61,7 @@ get_obs_qualitycodes <-
         lang   = language
       )
 
-    frost_control_args(input_args = input_args, func = "get_obs_qualitycodes")
+    frost_control_args(input_args = input_args, func = "get_available_qualitycodes")
 
     url <-
       paste0("https://", client_id,

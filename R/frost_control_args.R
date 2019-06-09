@@ -1,6 +1,6 @@
 frost_control_args <- function(input_args, func) {
 
-  if (func == "get_obs") {
+  if (func == "get_observations") {
 
     input_args_ctrl <-
       list(
@@ -74,7 +74,7 @@ frost_control_args <- function(input_args, func) {
         fields            = list(type = "character")
       )
 
-  } else if (func == "get_obs_timeseries") {
+  } else if (func == "get_available_timeseries") {
 
     input_args_ctrl <-
       list(
@@ -93,7 +93,7 @@ frost_control_args <- function(input_args, func) {
         fields                = list(type = "character")
       )
 
-  } else if (func == "get_obs_qualitycodes") {
+  } else if (func == "get_available_qualitycodes") {
 
     input_args_ctrl <-
       list(
