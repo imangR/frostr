@@ -3,7 +3,7 @@
 \name{get_elements}
 \alias{get_elements}
 \title{Get metadata about the weather and climate elements that are
-defined for use in the Frost API}
+defined in the Frost API}
 \usage{
 get_elements(client_id, ...)
 
@@ -12,18 +12,18 @@ get_elements(client_id,
              names = NULL,
              descriptions = NULL,
              units = NULL,
-             codeTables= NULL,
+             code_tables= NULL,
              statuses = NULL,
-             calculationMethod = NULL,
+             calculation_method = NULL,
              categories = NULL,
-             timeOffsets = NULL,
-             sensorLevels = NULL,
-             oldElementCodes = NULL,
-             oldUnits = NULL,
-             cfStandardNames = NULL,
-             cfCellMethods = NULL,
-             cfUnits = NULL,
-             cfVersions = NULL,
+             time_offsets = NULL,
+             sensor_levels = NULL,
+             old_element_codes = NULL,
+             old_units = NULL,
+             cf_standard_names = NULL,
+             cf_cell_methods = NULL,
+             cf_units = NULL,
+             cf_versions = NULL,
              fields = NULL,
              return_response = FALSE)
 }
@@ -40,60 +40,64 @@ for.}
 
 \item{units}{A character vector. The units to get metadata for.}
 
+\item{code_tables}{A character vector. The code tables to get metadata for.}
+
 \item{statuses}{A character vector. The statuses to get metadata for.}
 
-\item{categories}{A character vector. The categories to get metadata for.}
-
-\item{fields}{A character vector. A vector of the fields that should be
-present in the response. If not set, then all fields will be retrieved.}
-
-\item{return_response}{A logical. If set to \code{TRUE}, then the function
-returns the response from the GET request. If set to \code{FALSE} (default),
-then the function returns a dataframe of the content in the response to the
-GET request.}
-
-\item{codeTables}{A character vector. The code tables to get metadata for.}
-
-\item{calculationMethod}{A string. The calculation method as a JSON filter.
+\item{calculation_method}{A string. The calculation method as a JSON filter.
 Supports the following keys: baseNames, methods, innerMethods, periods,
 innerPeriods, tresholds, methodDescriptions, innerMethodDescriptions,
 methodUnits, and innerMethodUnits.}
 
-\item{timeOffsets}{A character vector. The time offsets to get metadata for.}
+\item{categories}{A character vector. The categories to get metadata for.}
 
-\item{sensorLevels}{A string. The sensor levels to get metadata
+\item{time_offsets}{A character vector. The time offsets to get metadata for.}
+
+\item{sensor_levels}{A string. The sensor levels to get metadata
 for as a JSON filter. Supports the following keys: levelTypes, units,
 defaultValues, and values.}
 
-\item{oldElementCodes}{A character vector. The old MET Norway element codes
+\item{old_element_codes}{A character vector. The old MET Norway element codes
 to get metadata for.}
 
-\item{oldUnits}{A character vector. The old MET Norway units to get
+\item{old_units}{A character vector. The old MET Norway units to get
 metadata for.}
 
-\item{cfStandardNames}{A character vector. The CF standard names to get
+\item{cf_standard_names}{A character vector. The CF standard names to get
 metadata for.}
 
-\item{cfCellMethods}{A character vector. The CF cell methods to get
+\item{cf_cell_methods}{A character vector. The CF cell methods to get
 metadata for.}
 
-\item{cfUnits}{A character vector. The CF units to get metadata for.}
+\item{cf_units}{A character vector. The CF units to get metadata for.}
 
-\item{cfVersions}{A character vector. The CF versions to get metadata for.}
+\item{cf_versions}{A character vector. The CF versions to get metadata for.}
+
+\item{fields}{A character vector. Fields to include in the response (i.e.
+output). If this parameter is specified, then only these fields are
+returned in the response. If not specified, then all fields will be
+returned in the response.}
+
+\item{language}{A string. The language of the fields in the response. The
+options are "en-US" (default), "nb-NO" (Norwegian, Bokmål), and "nn-NO"
+(Norwegian, Nynorsk).}
+
+\item{return_response}{A logical. If set to \code{TRUE}, then the function
+returns the response from the GET request. If set to \code{FALSE} (default),
+then the function returns a tibble (data frame) of the content in the
+response.}
 }
 \value{
-The function returns either a data frame of weather and climate
-elements, or the response of the GET request for location resource in
-the Frost API, depending on the value set for the \code{return_response}
-argument.
+The function returns either a data frame with metadata about
+climate and weather elements, or the response of the GET request, depending
+on the boolean value set for \code{return_response}.
 }
 \description{
 \code{get_elements()} retrieves metadata about weather and
-climate elements defined for use in the Frost API. The function requires a
-client ID for the \code{client_id} argument at minimum. Use the optional
-input arguments to filter the set of elements returned in the response.
-The optional function arguments default to NULL, which translates to no
-filter on the returned response from the Frost API.
+climate elements defined for use in the Frost API. The function requires an
+input for \code{client_id}. The other function arguments are optional, and
+default to \code{NULL}, which means that the response from the API is not
+filtered on these parameters.
 }
 \examples{
 client.id <- "<YOUR CLIENT ID>"

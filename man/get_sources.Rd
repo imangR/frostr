@@ -34,7 +34,7 @@ metadata for.}
 
 \item{types}{A string. The type of Frost API source that you want
 metadata for. Must be set to either "SensorSystem", "InterpolatedDataset",
-or "RegionDataset". Defaults to \code{NULL}.}
+or "RegionDataset". Defaults to \code{NULL}, which returns all three types.}
 
 \item{geometry}{A string. Get Frost API sources defined by a specified
 geometry. Geometries are specified as either "nearest(POINT(...))" or
@@ -42,10 +42,10 @@ geometry. Geometries are specified as either "nearest(POINT(...))" or
 
 \item{nearest_max_count}{A string. The maximum number of sources returned
 when using "nearest(POINT(...))" for the \code{geometry} argument. Defaults
-to 1 if not specified.}
+to 1.}
 
 \item{valid_time}{A string. The time interval for which the sources have
-been or still are valid (or applicable). Specify as "<date>/<date>" or
+been, or still are, valid (or applicable). Specify as "<date>/<date>" or
 "<date>/now" where <date> is a date in the ISO-8601 format (YYYY-MM-DD).
 Defaults to "now" if not specified, which returns only currently valid
 sources.}
@@ -71,30 +71,32 @@ for.}
 
 \item{wigos_id}{A string. The WIGOS ID to get metadata for.}
 
-\item{fields}{A character vector. A vector of the fields that should be
-present in the response. If not set, then all fields will be retrieved.}
+\item{fields}{A character vector. Fields to include in the response (i.e.
+output). If this parameter is specified, then only these fields are
+returned in the response. If not specified, then all fields will be
+returned in the response.}
 
 \item{return_response}{A logical. If set to \code{TRUE}, then the function
 returns the response from the GET request. If set to \code{FALSE} (default),
-then the function returns a dataframe of the content in the response to the
-GET request.}
+then the function returns a tibble (data frame) of the content in the
+response.}
 
 \item{wmo_id}{A string. The WMO ID to get metadata for.}
 }
 \value{
-The function returns either a data frame with metadata about sources
-or the response of the GET request for the sources resource in the Frost
-API, depending on the value set for the \code{return_response} argument.
+The function returns either a data frame with metadata about source
+entities, or the response of the GET request, depending on the boolean value
+set for \code{return_response}.
 }
 \description{
 \code{get_sources()} retrieves metadata about source entities
-(i.e. stations) defined for use in the Frost API. The function requires a
-client ID for the \code{client_id} argument at minimum. The other function
-arguments are optional, and default to \code{NULL}, which means that the
-response from the API is not filtered on these parameters.
+(i.e. stations) defined for use in the Frost API. The function requires an
+input for \code{client_id}. The other function arguments are optional, and
+default to \code{NULL}, which means that the response from the API is not
+filtered on these parameters.
 
-NB: At the time of writing (2019-06-08), The Frost API only returns country
-names in Norwegian.
+NB: At the time of writing (2019-06-08), the Frost API "sources" resource
+only returns country names in Norwegian.
 }
 \examples{
 client.id <- "<YOUR CLIENT ID>"

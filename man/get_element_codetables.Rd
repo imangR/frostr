@@ -6,11 +6,11 @@
 \usage{
 get_element_codetables(client_id, ...)
 
-get_elements(client_id,
-             ids = NULL,
-             fields = NULL,
-             lang = NULL,
-             return_response = FALSE)
+get_element_codetables(client_id,
+                       ids = NULL,
+                       fields = NULL,
+                       lang = NULL,
+                       return_response = FALSE)
 }
 \arguments{
 \item{client_id}{A string. The client ID to use to send requests to the
@@ -30,17 +30,16 @@ options are "en-US" (default), "nb-NO" (Norwegian, Bokmål), and "nn-NO"
 
 \item{return_response}{A logical. If set to \code{TRUE}, then the function
 returns the response from the GET request. If set to \code{FALSE} (default),
-then the function returns a dataframe of the content in the response to the
-GET request.}
+then the function returns a tibble (data frame) of the content in the
+response.}
 }
 \value{
-The function returns either a data frame of weather and climate
-elements, or the response of the GET request for location resource in
-the Frost API, depending on the value set for the \code{return_response}
-argument.
+The function returns either a data frame with metadata about code
+tables, or the response of the GET request, depending on the boolean value
+set for \code{return_response}.
 }
 \description{
-\code{get_element_codestables()} retrieves metadata about
+\code{get_element_codetables()} retrieves metadata about
 code tables. A code table defines a small number of discrete values for
 an element. The function requires input for \code{client_id}. The other
 function arguments are optional, and default to \code{NULL}, which means
