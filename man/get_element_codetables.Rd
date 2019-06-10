@@ -4,12 +4,10 @@
 \alias{get_element_codetables}
 \title{Get metadata about code tables for the "elements" resource}
 \usage{
-get_element_codetables(client_id, ...)
-
 get_element_codetables(client_id,
                        ids = NULL,
                        fields = NULL,
-                       lang = NULL,
+                       language = NULL,
                        return_response = FALSE)
 }
 \arguments{
@@ -46,8 +44,11 @@ function arguments are optional, and default to \code{NULL}, which means
 that the response from the API is not filtered on these parameters.
 }
 \examples{
+\dontrun{
 client.id <- "<YOUR CLIENT ID>"
 
 # Get the full code table
 code.tables <- get_element_codetables(client_id = client.id)
+}
+
 }

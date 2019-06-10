@@ -4,8 +4,6 @@
 \alias{get_observations}
 \title{Get weather observations from the "observation" resource in the Frost API}
 \usage{
-get_observations(client_id, sources, reference_time, elements, ...)
-
 get_observations(client_id,
                  sources,
                  reference_time,
@@ -30,14 +28,14 @@ API.}
 \item{sources}{A character vector. The station IDs of the data sources
 to get observations for. For example, "SN18700" is the station ID for
 "Blindern". The full list of station IDs can be retrieved with
-\link{\code{get_sources()}}.}
+\code{\link{get_sources}()}.}
 
 \item{reference_time}{A string. The time range to get observations for in
 either extended ISO-8601 format or the single word "latest".}
 
 \item{elements}{A character vector. The elements to get observations for.
 The full list of elements can be retrieved with the
-\link{\code{get_elements()}}.}
+\code{\link{get_elements}()}.}
 
 \item{maxage}{A string. The maximum observation age as an ISO-8601 period,
 e.g. \code{"P1D"}. This parameter is only applicable when \code{reference_time
@@ -101,6 +99,7 @@ to \code{NULL}, which means that the response from the API is not
 filtered on these parameters.
 }
 \examples{
+\dontrun{
 client.id <- "<YOUR CLIENT ID>"
 
 # Get daily data for temperature, rain, and wind speed for 2018
@@ -110,9 +109,10 @@ elements <- c("mean(air_temperature P1D)",
               "sum(precipitation_amount P1D)",
               "mean(wind_speed P1D)")
 
-obs_df <- get_observations(client_id = client.id,
+obs.df <- get_observations(client_id = client.id,
                            sources = sources,
                            reference_time = reference.time,
-                           elements)
+                           elements = elements)
+}
 
 }

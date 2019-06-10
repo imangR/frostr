@@ -4,8 +4,6 @@
 \alias{get_sources}
 \title{Get metadata for source entities defined in the Frost API}
 \usage{
-get_sources(client_id, ...)
-
 get_sources(client_id,
             ids = NULL,
             types = NULL,
@@ -59,6 +57,8 @@ for.}
 
 \item{municipality}{A string. The municipality to get metadata for.}
 
+\item{wmo_id}{A string. The WMO ID to get metadata for.}
+
 \item{station_holder}{A string. The station holder name to get metadata
 for.}
 
@@ -80,8 +80,6 @@ returned in the response.}
 returns the response from the GET request. If set to \code{FALSE} (default),
 then the function returns a tibble (data frame) of the content in the
 response.}
-
-\item{wmo_id}{A string. The WMO ID to get metadata for.}
 }
 \value{
 The function returns either a data frame with metadata about source
@@ -99,13 +97,15 @@ NB: At the time of writing (2019-06-08), the Frost API "sources" resource
 only returns country names in Norwegian.
 }
 \examples{
+\dontrun{
 client.id <- "<YOUR CLIENT ID>"
 
 # Get data for all sources
 sources <- get_sources(client_id = client.id)
 
 # Get data for sources in Norway
-sources_norway <- get_sources(client.id = client.id,
+sources.norway <- get_sources(client.id = client.id,
                               country = "NO")
+}
 
 }

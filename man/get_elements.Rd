@@ -5,8 +5,6 @@
 \title{Get metadata about the weather and climate elements that are
 defined in the Frost API}
 \usage{
-get_elements(client_id, ...)
-
 get_elements(client_id,
              ids = NULL,
              names = NULL,
@@ -25,6 +23,7 @@ get_elements(client_id,
              cf_units = NULL,
              cf_versions = NULL,
              fields = NULL,
+             language = NULL,
              return_response = FALSE)
 }
 \arguments{
@@ -100,9 +99,11 @@ default to \code{NULL}, which means that the response from the API is not
 filtered on these parameters.
 }
 \examples{
+\dontrun{
 client.id <- "<YOUR CLIENT ID>"
 
 # Get data for all elements
-elements <- get_elements(client_id = client.id)
+elements.df <- get_elements(client_id = client.id)
+}
 
 }

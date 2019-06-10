@@ -4,12 +4,10 @@
 \alias{get_available_qualitycodes}
 \title{Get metadata on existing quality flags in the "observation" resource}
 \usage{
-get_available_qualitycodes(client_id, ...)
-
-get_obs(client_id,
-        fields = NULL,
-        language = NULL,
-        return_response = FALSE)
+get_available_qualitycodes(client_id,
+                           fields = NULL,
+                           language = NULL,
+                           return_response = FALSE)
 }
 \arguments{
 \item{client_id}{A string. The client ID to use to send requests to the Frost
@@ -43,13 +41,15 @@ to \code{NULL}, which means that the response from the API is not
 filtered on these parameters.
 }
 \examples{
+\dontrun{
 client.id <- "<YOUR CLIENT ID>"
 
 # Get metadata for quality codes
 qualitycodes <- get_available_qualitycodes(client_id = client.id)
 
 # Get the summarized metadata for quality codes
-summarized_df <- get_available_qualitycodes(client_id = client.id,
+summarized.df <- get_available_qualitycodes(client_id = client.id,
                                             fields = "summarized")
+}
 
 }

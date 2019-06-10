@@ -4,8 +4,6 @@
 \alias{get_locations}
 \title{Get metadata for the location names defined in the Frost API}
 \usage{
-get_locations(client_id, ...)
-
 get_locations(client_id,
               names = NULL,
               geometry = NULL,
@@ -44,12 +42,4 @@ defined for use in the Frost API. The function requires an
 input for \code{client_id}. The other function arguments are optional, and
 default to \code{NULL}, which means that the response from the API is not
 filtered on these parameters.
-}
-\examples{
-´
-client.id <- "<YOUR CLIENT ID>"
-
-# Get all location names
-locations_df <- get_locations(client_id = client.id)
-
 }
