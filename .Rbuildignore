@@ -1,4 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 .RDS$
-hello.R
+.RData$
+.Rhistory$
+README.Rmd
+.gitignore
+cran-comments.md
