@@ -37,7 +37,7 @@
 #' location names, or the response of the GET request, depending on the
 #' boolean value set for \code{return_response}.
 #'
-#' @examples´
+#' @examples
 #' \dontrun{
 #' client.id <- "<YOUR CLIENT ID>"
 #'
