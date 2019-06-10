@@ -4,8 +4,8 @@ Title: R Client to MET Norway's Frost API
 Version: 0.1.0
 Authors@R: person("Iman", "Ghayoornia", email = "ghayoornia.iman@gmail.com",
   role = c("aut", "cre"))
-Description: frostr is an unofficial R client to MET Norway's Frost API.
-    The package provides functions to retrieve data from the Frost API as
+Description: frostr is an unofficial R client to MET Norway's Frost API <https://frost.met.no/index2.html>.
+    The package's primary function is to retrieve data from the Frost API as
     data frames, which can then be used, or combined with other datasets,
     for data analyses. The Frost API, and data, is made available by 
     The Norwegian Meteorological Institute (MET Norway). The data and products
