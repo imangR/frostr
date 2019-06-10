@@ -8,8 +8,6 @@
 #' filtered on these parameters.
 #'
 #' @usage
-#' get_elements(client_id, ...)
-#'
 #' get_elements(client_id,
 #'              ids = NULL,
 #'              names = NULL,
@@ -28,6 +26,7 @@
 #'              cf_units = NULL,
 #'              cf_versions = NULL,
 #'              fields = NULL,
+#'              language = NULL,
 #'              return_response = FALSE)
 #'
 #' @param client_id A string. The client ID to use to send requests to the
@@ -94,11 +93,14 @@
 #' on the boolean value set for \code{return_response}.
 #'
 #' @examples
+#' \dontrun{
 #' client.id <- "<YOUR CLIENT ID>"
 #'
 #' # Get data for all elements
-#' elements <- get_elements(client_id = client.id)
+#' elements.df <- get_elements(client_id = client.id)
+#' }
 #'
+#' @export get_elements
 
 get_elements <-
   function(

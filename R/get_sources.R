@@ -10,8 +10,6 @@
 #' only returns country names in Norwegian.
 #'
 #' @usage
-#' get_sources(client_id, ...)
-#'
 #' get_sources(client_id,
 #'             ids = NULL,
 #'             types = NULL,
@@ -93,15 +91,18 @@
 #' set for \code{return_response}.
 #'
 #' @examples
+#' \dontrun{
 #' client.id <- "<YOUR CLIENT ID>"
 #'
 #' # Get data for all sources
 #' sources <- get_sources(client_id = client.id)
 #'
 #' # Get data for sources in Norway
-#' sources_norway <- get_sources(client.id = client.id,
+#' sources.norway <- get_sources(client.id = client.id,
 #'                               country = "NO")
+#' }
 #'
+#' @export get_sources
 
 get_sources <-
   function(
@@ -115,7 +116,7 @@ get_sources <-
     country = NULL,
     county = NULL,
     municipality = NULL,
-    wmoid = NULL,
+    wmo_id = NULL,
     station_holder = NULL,
     external_ids = NULL,
     icao_code = NULL,
@@ -136,7 +137,7 @@ get_sources <-
         country         = country,
         county          = county,
         municipality    = municipality,
-        wmoid           = wmoid,
+        wmoid           = wmo_id,
         stationholder   = station_holder,
         externalids     = frost_csl(external_ids),
         icaocode        = icao_code,
@@ -145,7 +146,7 @@ get_sources <-
         fields          = frost_csl(fields)
       )
 
-    frost_control_sources(input_args = input_args, func = "get_sources")
+    frost_control_args(input_args = input_args, func = "get_sources")
 
     url <-
       paste0("https://", client_id, "@frost.met.no/sources/v0.jsonld",

@@ -7,8 +7,6 @@
 #' filtered on these parameters.
 #'
 #' @usage
-#' get_locations(client_id, ...)
-#'
 #' get_locations(client_id,
 #'               names = NULL,
 #'               geometry = NULL,
@@ -40,11 +38,14 @@
 #' boolean value set for \code{return_response}.
 #'
 #' @examples´
+#' \dontrun{
 #' client.id <- "<YOUR CLIENT ID>"
 #'
 #' # Get all location names
-#' locations_df <- get_locations(client_id = client.id)
+#' locations.df <- get_locations(client_id = client.id)
+#' }
 #'
+#' @export get_locations
 
 get_locations <-
   function(
@@ -73,7 +74,7 @@ get_locations <-
     r <- httr::GET(url, query = input_args)
 
     httr::stop_for_status(r)
-    stop_for_type(r)
+    frost_stop_for_type(r)
 
     if (return_response) return(r)
 

@@ -7,12 +7,10 @@
 #' that the response from the API is not filtered on these parameters.
 #'
 #' @usage
-#' get_element_codetables(client_id, ...)
-#'
 #' get_element_codetables(client_id,
 #'                        ids = NULL,
 #'                        fields = NULL,
-#'                        lang = NULL,
+#'                        language = NULL,
 #'                        return_response = FALSE)
 #'
 #' @param client_id A string. The client ID to use to send requests to the
@@ -40,10 +38,14 @@
 #' set for \code{return_response}.
 #'
 #' @examples
+#' \dontrun{
 #' client.id <- "<YOUR CLIENT ID>"
 #'
 #' # Get the full code table
 #' code.tables <- get_element_codetables(client_id = client.id)
+#' }
+#'
+#' @export get_element_codetables
 
 get_element_codetables <-
   function(

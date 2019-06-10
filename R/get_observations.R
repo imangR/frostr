@@ -9,8 +9,6 @@
 #' filtered on these parameters.
 #'
 #' @usage
-#' get_observations(client_id, sources, reference_time, elements, ...)
-#'
 #' get_observations(client_id,
 #'                  sources,
 #'                  reference_time,
@@ -34,14 +32,14 @@
 #' @param sources A character vector. The station IDs of the data sources
 #' to get observations for. For example, "SN18700" is the station ID for
 #' "Blindern". The full list of station IDs can be retrieved with
-#' \link{\code{get_sources()}}.
+#' \code{\link{get_sources}()}.
 #'
 #' @param reference_time A string. The time range to get observations for in
 #' either extended ISO-8601 format or the single word "latest".
 #'
 #' @param elements A character vector. The elements to get observations for.
 #' The full list of elements can be retrieved with the
-#' \link{\code{get_elements()}}.
+#' \code{\link{get_elements}()}.
 #'
 #' @param maxage A string. The maximum observation age as an ISO-8601 period,
 #' e.g. \code{"P1D"}. This parameter is only applicable when \code{reference_time
@@ -95,6 +93,7 @@
 #' boolean value set for \code{return_response}.
 #'
 #' @examples
+#' \dontrun{
 #' client.id <- "<YOUR CLIENT ID>"
 #'
 #' # Get daily data for temperature, rain, and wind speed for 2018
@@ -104,11 +103,20 @@
 #'               "sum(precipitation_amount P1D)",
 #'               "mean(wind_speed P1D)")
 #'
-#' obs_df <- get_observations(client_id = client.id,
+#' obs.df <- get_observations(client_id = client.id,
 #'                            sources = sources,
 #'                            reference_time = reference.time,
-#'                            elements)
+#'                            elements = elements)
+#' }
 #'
+#' @importFrom httr GET
+#' @importFrom httr content
+#' @importFrom httr stop_for_status
+#' @importFrom httr user_agent
+#' @importFrom jsonlite fromJSON
+#' @importFrom tibble as_tibble
+#' @importFrom tidyr unnest
+#' @export get_observations
 
 get_observations <-
   function(
@@ -144,7 +152,7 @@ get_observations <-
         exposurecategories    = frost_csl(exposure_categories),
         qualities             = frost_csl(qualities),
         levels                = frost_csl(levels),
-        includeextra          = as.integer(include_extra),
+        includeextra          = include_extra,
         fields                = frost_csl(fields)
         )
 
@@ -168,7 +176,7 @@ get_observations <-
 
     r_data <- tibble::as_tibble(r_json[["data"]])
 
-    obs_df <- tidyr::unnest(r_data, observations)
+    obs_df <- tidyr::unnest(r_data, "observations")
     obs_df <- tibble::as_tibble(obs_df)
 
   }

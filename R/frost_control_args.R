@@ -71,7 +71,8 @@ frost_control_args <- function(input_args, func) {
         cfCellMethods     = list(type = "character"),
         cfUnits           = list(type = "character"),
         cfVersions        = list(type = "character"),
-        fields            = list(type = "character")
+        fields            = list(type = "character"),
+        lang              = list(type = "character", max_length = 1)
       )
 
   } else if (func == "get_available_timeseries") {

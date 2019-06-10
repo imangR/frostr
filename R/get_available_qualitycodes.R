@@ -7,12 +7,10 @@
 #' filtered on these parameters.
 #'
 #' @usage
-#' get_available_qualitycodes(client_id, ...)
-#'
-#' get_obs(client_id,
-#'         fields = NULL,
-#'         language = NULL,
-#'         return_response = FALSE)
+#' get_available_qualitycodes(client_id,
+#'                            fields = NULL,
+#'                            language = NULL,
+#'                            return_response = FALSE)
 #'
 #' @param client_id A string. The client ID to use to send requests to the Frost
 #' API.
@@ -37,15 +35,18 @@
 #' on the boolean value set for \code{return_response}.
 #'
 #' @examples
+#' \dontrun{
 #' client.id <- "<YOUR CLIENT ID>"
 #'
 #' # Get metadata for quality codes
 #' qualitycodes <- get_available_qualitycodes(client_id = client.id)
 #'
 #' # Get the summarized metadata for quality codes
-#' summarized_df <- get_available_qualitycodes(client_id = client.id,
+#' summarized.df <- get_available_qualitycodes(client_id = client.id,
 #'                                             fields = "summarized")
+#' }
 #'
+#' @export get_available_qualitycodes
 
 get_available_qualitycodes <-
   function(
