@@ -30,9 +30,19 @@ service. Here are some starters:
 
 The data is from the The Norwegian Meteorological Institute (abbreviated
 as MET Norway). The data and products are distributed under the
-[Norwegian License for Open Data
-(NLOD)](https://data.norge.no/nlod/en/2.0), and [Creative
+[Norwegian License for Open Data 2.0
+(NLOD)](https://data.norge.no/nlod/en/2.0) and [Creative
 Commons 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+### Development version
+
+frostr is not yet available on CRAN, but you can install a development
+version of frostr from GitHub with devtools.
+
+``` r
+# install.packages("devtools")
+devtools::install_github("PersianCatsLikeToMeow/frostr")
+```
 
 ## Example
 
