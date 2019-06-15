@@ -87,8 +87,8 @@ entities, or the response of the GET request, depending on the boolean value
 set for \code{return_response}.
 }
 \description{
-\code{get_sources()} retrieves metadata about source entities
-(i.e. stations) defined for use in the Frost API. The function requires an
+\code{get_sources()} retrieves metadata about (data) source
+entities defined for use in the Frost API. The function requires an
 input for \code{client_id}. The other function arguments are optional, and
 default to \code{NULL}, which means that the response from the API is not
 filtered on these parameters.
