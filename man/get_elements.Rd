@@ -45,7 +45,7 @@ for.}
 
 \item{calculation_method}{A string. The calculation method as a JSON filter.
 Supports the following keys: baseNames, methods, innerMethods, periods,
-innerPeriods, tresholds, methodDescriptions, innerMethodDescriptions,
+innerPeriods, thresholds, methodDescriptions, innerMethodDescriptions,
 methodUnits, and innerMethodUnits.}
 
 \item{categories}{A character vector. The categories to get metadata for.}
