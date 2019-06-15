@@ -34,10 +34,21 @@ as MET Norway). The data and products are distributed under the
 (NLOD)](https://data.norge.no/nlod/en/2.0) and [Creative
 Commons 4.0](https://creativecommons.org/licenses/by/4.0/).
 
+## Installation
+
+You can install the released version of frostr from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("frostr")
+```
+
 ### Development version
 
-frostr is not yet available on CRAN, but you can install a development
-version of frostr from GitHub with devtools.
+Alternatively, you can install a development version of frostr from
+GitHub to get bug fixes or new features before the next package version
+is released on CRAN. To install the development version, you can use
+devtools to install frostr from GitHub.
 
 ``` r
 # install.packages("devtools")
@@ -48,8 +59,8 @@ devtools::install_github("PersianCatsLikeToMeow/frostr")
 
 Say that I want to retrieve daily mean temperature, sum precipitation,
 and mean wind speed data for the first five months of 2019 as registered
-by the observational station at Blindern. Then, I can utilize frostr to
-get that data as follows.
+by the data source at Blindern. Then, I can utilize frostr to get that
+data as follows.
 
 ``` r
 # Attach packages
@@ -60,7 +71,7 @@ library(stringr)
 # Set your client ID
 client.id <- "<YOUR CLIENT ID>"
 
-# Find the station (source) ID for Blindern owned by MET.NO
+# Find the source ID for Blindern held by MET.NO
 sources <- get_sources(client_id = client.id)
 
 blindern.id <- sources %>%
@@ -103,7 +114,7 @@ that I can identify and fix the issue.
 ## File an issue or suggest an improvement
 
 If you want to report a discovered bug, raise some other issue, or
-suggest an improvement to bysykkel, then please file an issue on
+suggest an improvement to frostr, then please file an issue on
 [GitHub](https://github.com/PersianCatsLikeToMeow/frostr/issues). For
 bugs, please file a minimal reproducible example.
 
