@@ -99,7 +99,7 @@ to \code{NULL}, which means that the response from the API is not
 filtered on these parameters.
 }
 \examples{
-\dontrun{
+\donttest{
 client.id <- "<YOUR CLIENT ID>"
 
 # Get daily data for temperature, rain, and wind speed for 2018

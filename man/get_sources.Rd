@@ -97,7 +97,7 @@ NB: At the time of writing (2019-06-08), the Frost API "sources" resource
 only returns country names in Norwegian.
 }
 \examples{
-\dontrun{
+\donttest{
 client.id <- "<YOUR CLIENT ID>"
 
 # Get data for all sources

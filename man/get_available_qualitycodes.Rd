@@ -41,7 +41,7 @@ to \code{NULL}, which means that the response from the API is not
 filtered on these parameters.
 }
 \examples{
-\dontrun{
+\donttest{
 client.id <- "<YOUR CLIENT ID>"
 
 # Get metadata for quality codes

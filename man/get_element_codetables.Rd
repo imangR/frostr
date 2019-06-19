@@ -44,7 +44,7 @@ function arguments are optional, and default to \code{NULL}, which means
 that the response from the API is not filtered on these parameters.
 }
 \examples{
-\dontrun{
+\donttest{
 client.id <- "<YOUR CLIENT ID>"
 
 # Get the full code table
