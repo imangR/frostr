@@ -1,5 +1,4 @@
 ## Resubmission
-
 In this version, I have
 
 * updated description in DESCRIPTION
