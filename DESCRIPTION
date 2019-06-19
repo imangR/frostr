@@ -1,15 +1,14 @@
 Package: frostr
 Type: Package
-Title: R Client to MET Norway's Frost API
+Title: R Client to MET Norway's 'Frost' API
 Version: 0.1.0
 Authors@R: person("Iman", "Ghayoornia", email = "ghayoornia.iman@gmail.com",
   role = c("aut", "cre"))
-Description: An R client to MET Norway's Frost API <https://frost.met.no/index2.html>.
-    frostr's primary function is to retrieve data from the Frost API as
-    data frames, which can then be used, or combined with other datasets,
-    for data analyses. The Frost API, and data, is made available by 
-    The Norwegian Meteorological Institute (MET Norway). The data and products
-    are distributed under the Norwegian License for Open Data 2.0 (NLOD) <https://data.norge.no/nlod/en/2.0>
+Description: An unofficial R client to MET Norway's 
+    'Frost' API <https://frost.met.no/index2.html> to retrieve data as data 
+    frames. The 'Frost' API, and data, is made available by the Norwegian
+    Meteorological Institute (MET Norway). The data and products are 
+    distributed under the Norwegian License for Open Data 2.0 (NLOD) <https://data.norge.no/nlod/en/2.0>
     and Creative Commons 4.0 <https://creativecommons.org/licenses/by/4.0/>.
 License: MIT + file LICENSE
 Encoding: UTF-8
