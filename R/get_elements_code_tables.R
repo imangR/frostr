@@ -38,7 +38,7 @@
 #' set for \code{return_response}.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' client.id <- "<YOUR CLIENT ID>"
 #'
 #' # Get the full code table

@@ -78,7 +78,7 @@
 #' on the boolean value set for \code{return_response}.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' client.id <- "<YOUR CLIENT ID>"
 #'
 #' # Get metadata on available time series for Blindern station (with station

@@ -91,7 +91,7 @@
 #' set for \code{return_response}.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' client.id <- "<YOUR CLIENT ID>"
 #'
 #' # Get data for all sources

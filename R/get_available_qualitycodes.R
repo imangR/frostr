@@ -35,7 +35,7 @@
 #' on the boolean value set for \code{return_response}.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' client.id <- "<YOUR CLIENT ID>"
 #'
 #' # Get metadata for quality codes
