@@ -20,7 +20,7 @@
 #'
 #' @param fields A character vector. The field to include in the response (i.e.
 #' output). If this parameter is set, then only the specified field is
-#' returned as a dataframe. If not set, then all fields will be
+#' returned as a data frame. If not set, then all fields will be
 #' returned in the response as a list. The options are "summarized" and
 #' "details".
 #'
@@ -30,10 +30,10 @@
 #'
 #' @param return_response A logical. If set to \code{TRUE}, then the function
 #' returns the response from the GET request. If set to \code{FALSE} (default),
-#' then the function returns a tibble (dataframe) of the content in the
+#' then the function returns a tibble (data frame) of the content in the
 #' response.
 #'
-#' @return The function returns either a dataframe with metadata about code
+#' @return The function returns either a data frame with metadata about code
 #' tables, or the response of the GET request, depending on the boolean value
 #' set for \code{return_response}.
 #'

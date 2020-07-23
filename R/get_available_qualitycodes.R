@@ -1,6 +1,6 @@
 #' @title Get metadata on existing quality flags in the "observation" resource
 #'
-#' @description \code{get_available_qualitycodes()} returns a dataframe with
+#' @description \code{get_available_qualitycodes()} returns a data frame with
 #' quality flags that describes the quality of an observation. The function requires
 #' input for \code{client_id}. The other function arguments are optional, and default
 #' to \code{NULL}, which means that the response from the API is not
@@ -17,7 +17,7 @@
 #'
 #' @param fields A character vector. The field to include in the response (i.e.
 #' output). If this parameter is set, then only the specified field is
-#' returned as a dataframe. If not set, then all fields will be
+#' returned as a data frame. If not set, then all fields will be
 #' returned in the response as a list. The options are \code{NULL} (default),
 #' \code{"summarized"} and \code{"details"}.
 #'
@@ -27,10 +27,10 @@
 #'
 #' @param return_response A logical. If set to \code{TRUE}, then the function
 #' returns the response from the GET request. If set to \code{FALSE} (default),
-#' then the function returns a tibble (dataframe) of the content in the
+#' then the function returns a tibble (data frame) of the content in the
 #' response.
 #'
-#' @return The function returns either a dataframe of
+#' @return The function returns either a data frame of
 #' quality flags, or the response of the GET request, depending
 #' on the boolean value set for \code{return_response}.
 #'
