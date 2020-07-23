@@ -38,11 +38,11 @@
 #' set for \code{return_response}.
 #'
 #' @examples
-#' \donttest{
-#' client.id <- "<YOUR CLIENT ID>"
+#' \dontrun{
+#' frost_client_id <- "<YOUR FROST CLIENT ID>"
 #'
 #' # Get the full code table
-#' code.tables <- get_element_codetables(client_id = client.id)
+#' code_tables <- get_element_codetables(client_id = frost_client_id)
 #' }
 #'
 #' @export get_element_codetables
@@ -69,7 +69,9 @@ get_element_codetables <-
       paste0("https://", client_id, "@frost.met.no/elements/codeTables/v0.jsonld",
              collapse = NULL)
 
-    r <- httr::GET(url, query = input_args)
+    frostr_ua <- httr::user_agent("https://github.com/imangR/frostr")
+
+    r <- httr::GET(url, frostr_ua, query = input_args)
 
     httr::stop_for_status(r)
     frost_stop_for_type(r)
@@ -79,6 +81,6 @@ get_element_codetables <-
     r_content <- httr::content(r, as = "text", encoding = "UTF-8")
     r_json <- jsonlite::fromJSON(r_content, flatten = TRUE)
 
-    r_data <- tibble::as_tibble(r_json[["data"]])
+    tibble::as_tibble(r_json[["data"]])
 
   }

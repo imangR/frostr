@@ -78,11 +78,11 @@ returned in the response.}
 
 \item{return_response}{A logical. If set to \code{TRUE}, then the function
 returns the response from the GET request. If set to \code{FALSE} (default),
-then the function returns a tibble (data frame) of the content in the
+then the function returns a tibble (dataframe) of the content in the
 response.}
 }
 \value{
-The function returns either a data frame with metadata about source
+The function returns either a dataframe with metadata about source
 entities, or the response of the GET request, depending on the boolean value
 set for \code{return_response}.
 }
@@ -97,15 +97,15 @@ NB: At the time of writing (2019-06-08), the Frost API "sources" resource
 only returns country names in Norwegian.
 }
 \examples{
-\donttest{
-client.id <- "<YOUR CLIENT ID>"
+\dontrun{
+frost_client_id <- "<YOUR FROST CLIENT ID>"
 
 # Get data for all sources
-sources <- get_sources(client_id = client.id)
+sources <- get_sources(client_id = frost_client_id)
 
 # Get data for sources in Norway
-sources.norway <- get_sources(client.id = client.id,
-                              country = "NO")
+sources_norway <- get_sources(client_id = frost_client_id,
+                              country   = "NO")
 }
 
 }

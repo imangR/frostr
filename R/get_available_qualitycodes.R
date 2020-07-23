@@ -1,7 +1,7 @@
 #' @title Get metadata on existing quality flags in the "observation" resource
 #'
-#' @description \code{get_available_qualitycodes()} provides a data frame with all
-#' possible detail values given the quality service. The function requires
+#' @description \code{get_available_qualitycodes()} returns a data frame with
+#' quality flags that describes the quality of an observation. The function requires
 #' input for \code{client_id}. The other function arguments are optional, and default
 #' to \code{NULL}, which means that the response from the API is not
 #' filtered on these parameters.
@@ -18,8 +18,8 @@
 #' @param fields A character vector. The field to include in the response (i.e.
 #' output). If this parameter is set, then only the specified field is
 #' returned as a data frame. If not set, then all fields will be
-#' returned in the response as a list. The options are "summarized" and
-#' "details".
+#' returned in the response as a list. The options are \code{NULL} (default),
+#' \code{"summarized"} and \code{"details"}.
 #'
 #' @param language A string. The language of the fields in the response. The
 #' options are "en-US" (default), "nb-NO" (Norwegian, Bokmål), and "nn-NO"
@@ -30,19 +30,19 @@
 #' then the function returns a tibble (data frame) of the content in the
 #' response.
 #'
-#' @return The function returns either a data frame with metadata about
+#' @return The function returns either a data frame of
 #' quality flags, or the response of the GET request, depending
 #' on the boolean value set for \code{return_response}.
 #'
 #' @examples
-#' \donttest{
-#' client.id <- "<YOUR CLIENT ID>"
+#' \dontrun{
+#' frost_client_id <- "<YOUR FROST CLIENT ID>"
 #'
 #' # Get metadata for quality codes
-#' qualitycodes <- get_available_qualitycodes(client_id = client.id)
+#' qualitycodes <- get_available_qualitycodes(client_id = frost_client_id)
 #'
 #' # Get the summarized metadata for quality codes
-#' summarized.df <- get_available_qualitycodes(client_id = client.id,
+#' summarized_df <- get_available_qualitycodes(client_id = frost_client_id,
 #'                                             fields = "summarized")
 #' }
 #'
@@ -69,9 +69,9 @@ get_available_qualitycodes <-
              "@frost.met.no/observations/availableQualityCodes/v0.jsonld",
              collapse = NULL)
 
-    frostr_ua <- httr::user_agent("https://github.com/PersianCatsLikeToMeow/frostr")
+    frostr_ua <- httr::user_agent("https://github.com/imangR/frostr")
 
-    r <- httr::GET(url, query = input_args, frostr_ua)
+    r <- httr::GET(url, frostr_ua, query = input_args)
 
     httr::stop_for_status(r)
     frost_stop_for_type(r)
@@ -85,9 +85,7 @@ get_available_qualitycodes <-
 
       r_data <- r_json[["data"]]
 
-    }
-
-    else if (fields == "summarized") {
+    } else if (fields == "summarized") {
 
       r_data <- tibble::as_tibble(r_json[["data"]][[fields]])
 

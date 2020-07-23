@@ -93,20 +93,20 @@
 #' boolean value set for \code{return_response}.
 #'
 #' @examples
-#' \donttest{
-#' client.id <- "<YOUR CLIENT ID>"
+#' \dontrun{
+#' frost_client_id <- "<YOUR FROST CLIENT ID>"
 #'
 #' # Get daily data for temperature, rain, and wind speed for 2018
 #' sources <- "SN18700"
-#' reference.time <- "2018-01-01/2018-12-31"
+#' reference_time <- "2018-01-01/2018-12-31"
 #' elements <- c("mean(air_temperature P1D)",
 #'               "sum(precipitation_amount P1D)",
 #'               "mean(wind_speed P1D)")
 #'
-#' obs.df <- get_observations(client_id = client.id,
-#'                            sources = sources,
-#'                            reference_time = reference.time,
-#'                            elements = elements)
+#' observations_df <- get_observations(client_id      = frost_client_id,
+#'                                     sources        = sources,
+#'                                     reference_time = reference_time,
+#'                                     elements       = elements)
 #' }
 #'
 #' @importFrom httr GET
@@ -162,9 +162,9 @@ get_observations <-
     paste0("https://", client_id, "@frost.met.no/observations/v0.jsonld",
            collapse = NULL)
 
-    frostr_ua <- httr::user_agent("https://github.com/PersianCatsLikeToMeow/frostr")
+    frostr_ua <- httr::user_agent("https://github.com/imangR/frostr")
 
-    r <- httr::GET(url, query = input_args, frostr_ua)
+    r <- httr::GET(url, frostr_ua, query = input_args)
 
     httr::stop_for_status(r)
     frost_stop_for_type(r)

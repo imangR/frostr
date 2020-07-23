@@ -78,15 +78,15 @@
 #' on the boolean value set for \code{return_response}.
 #'
 #' @examples
-#' \donttest{
-#' client.id <- "<YOUR CLIENT ID>"
+#' \dontrun{
+#' frost_client_id <- "<YOUR FROST CLIENT ID>"
 #'
 #' # Get metadata on available time series for Blindern station (with station
 #' # ID SN18700)
 #' sources <- "SN18700"
 #'
-#' obs.timeseries <- get_available_timeseries(client_id = client.id,
-#'                                            sources = sources)
+#' obs_available_ts <- get_available_timeseries(client_id = frost_client_id,
+#'                                              sources   = sources)
 #' }
 #'
 #' @export get_available_timeseries
@@ -132,9 +132,9 @@ get_available_timeseries <-
              "@frost.met.no/observations/availableTimeSeries/v0.jsonld",
              collapse = NULL)
 
-    frostr_ua <- httr::user_agent("https://github.com/PersianCatsLikeToMeow/frostr")
+    frostr_ua <- httr::user_agent("https://github.com/imangR/frostr")
 
-    r <- httr::GET(url, query = input_args, frostr_ua)
+    r <- httr::GET(url, frostr_ua, query = input_args)
 
     httr::stop_for_status(r)
     frost_stop_for_type(r)
@@ -144,6 +144,6 @@ get_available_timeseries <-
     r_content <- httr::content(r, as = "text", encoding = "UTF-8")
     r_json <- jsonlite::fromJSON(r_content, flatten = TRUE)
 
-    r_data <- tibble::as_tibble(r_json[["data"]])
+    tibble::as_tibble(r_json[["data"]])
 
   }

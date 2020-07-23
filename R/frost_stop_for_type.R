@@ -4,6 +4,6 @@
 
 frost_stop_for_type <- function(response) {
   if (httr::http_type(response) != "application/json") {
-    stop("The API request did not return content as JSON", call. = FALSE)
+    stop("The API GET request did not return content as JSON", call. = FALSE)
   }
 }

@@ -113,8 +113,8 @@ frost_control_args <- function(input_args, func) {
 
   } else {
 
-    stop("The package developer has made an error, and the function cannot ",
-         "continue with your requested operation.",
+    stop("The package has encountered an error, and the function cannot ",
+         "continue with the requested operation.",
          call. = FALSE)
 
   }
