@@ -28,11 +28,11 @@ returned in the response.}
 
 \item{return_response}{A logical. If set to \code{TRUE}, then the function
 returns the response from the GET request. If set to \code{FALSE} (default),
-then the function returns a tibble (data frame) of the content in the
+then the function returns a tibble (dataframe) of the content in the
 response.}
 }
 \value{
-The function returns either a data frame with metadata about
+The function returns either a dataframe with metadata about
 location names, or the response of the GET request, depending on the
 boolean value set for \code{return_response}.
 }
@@ -44,11 +44,11 @@ default to \code{NULL}, which means that the response from the API is not
 filtered on these parameters.
 }
 \examples{
-\donttest{
-client.id <- "<YOUR CLIENT ID>"
+\dontrun{
+frost_client_id <- "<YOUR FROST CLIENT ID>"
 
 # Get all location names
-locations.df <- get_locations(client_id = client.id)
+locations_df <- get_locations(client_id = frost_client_id)
 }
 
 }
