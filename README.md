@@ -3,9 +3,14 @@
 
 # frostr
 
+<!-- badges: start -->
+
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/imangR/frostr/blob/master/LICENSE)
+<!-- badges: end -->
+
 ## Overview
 
-frostr is an unofficial R client to MET Norway’s Frost API. The package
+frostr is an unofficial R API to MET Norway’s Frost API. The package
 provides functions that retrieves data from resources in the Frost API
 to R as data frames.
 
@@ -20,8 +25,8 @@ The functions are
   - `get_element_codetables()` to get code tables for climate and
     weather elements
 
-Please visit the [Frost API website](https://frost.met.no/index2.html)
-to get a client ID and learn more about how to properly use the API
+Please visit the [Frost API website](https://frost.met.no/index.html) to
+get a client ID and learn more about how to properly use the API
 service. Here are some starters:
 
   - [How to use Frost](https://frost.met.no/howto.html)
@@ -52,7 +57,7 @@ devtools to install frostr from GitHub.
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("PersianCatsLikeToMeow/frostr")
+devtools::install_github("imangR/frostr")
 ```
 
 ## Example
@@ -69,17 +74,17 @@ library(dplyr)
 library(stringr)
 
 # Set your client ID
-client.id <- "<YOUR CLIENT ID>"
+frost_client_id <- "<YOUR CLIENT ID>"
 
 # Find the source ID for Blindern held by MET.NO
-sources <- get_sources(client_id = client.id)
+sources <- get_sources(client_id = frost_client_id)
 
-blindern.id <- sources %>%
+blindern_id <- sources %>%
   filter(str_detect(name, "OSLO - BLINDERN") & stationHolders == "MET.NO") %>% 
   select(id)
 
 # Find the name of the climate and weather elements of interest
-elements <- get_elements(client_id = client.id)
+elements <- get_elements(client_id = frost_client_id)
 
 View(elements)
 #> id                            name                                      units
@@ -89,18 +94,18 @@ View(elements)
 #> mean(wind_speed P1D)          Average of wind speed of main obs. (24 h) m/s
 #> ...                           ...                                       ...
 
-element.names <- c("mean(air temperature P1D)",
+elements <- c("mean(air temperature P1D)",
                    "sum(precipitation_amount P1D)",
                    "mean(wind_speed P1D)")
 
 # Declare the time range for which you want to retrieve observations
-reference.time <- "2019-01-01/2019-05-31"
+reference_time <- "2019-01-01/2019-05-31"
 
 # Get the weather observations specified
-observations.df <- get_observations(client_id      = client.id,
-                                    sources        = blindern.id,
-                                    elements       = element.names,
-                                    reference_time = reference.time)
+observations_df <- get_observations(client_id      = frost_client_id,
+                                    sources        = blindern_id,
+                                    elements       = elements,
+                                    reference_time = reference_time)
 ```
 
 ## Stability
@@ -108,15 +113,15 @@ observations.df <- get_observations(client_id      = client.id,
 frostr can break if MET Norway make changes to the Frost API. If you
 discover that a function does not work, then raise an issue by
 submitting a reproducible example on
-[GitHub](https://github.com/PersianCatsLikeToMeow/frostr/issues), so
-that I can identify and fix the issue.
+[GitHub](https://github.com/imangR/frostr/issues), so that I can
+identify and fix the issue.
 
 ## File an issue or suggest an improvement
 
 If you want to report a discovered bug, raise some other issue, or
 suggest an improvement to frostr, then please file an issue on
-[GitHub](https://github.com/PersianCatsLikeToMeow/frostr/issues). For
-bugs, please file a minimal reproducible example.
+[GitHub](https://github.com/imangR/frostr/issues). For bugs, please file
+a minimal reproducible example.
 
 ## Known issues
 
