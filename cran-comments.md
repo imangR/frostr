@@ -10,7 +10,7 @@ In this version, I have
 ## Test environments
 * local Windows  install, R 4.0.2
 * local OS X install, R 4.0.2
-* local Ubuntu 20.04 LTS install, R 4.02
+* local Ubuntu 20.04 LTS install, R 4.0.2
 
 ## R CMD check results
 There were no ERRORs, WARNINGs or NOTEs. 
