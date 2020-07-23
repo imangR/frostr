@@ -83,23 +83,23 @@
 #'
 #' @param return_response A logical. If set to \code{TRUE}, then the function
 #' returns the response from the GET request. If set to \code{FALSE} (default),
-#' then the function returns a tibble (data frame) of the content in the
+#' then the function returns a tibble (dataframe) of the content in the
 #' response.
 #'
-#' @return The function returns either a data frame with metadata about source
+#' @return The function returns either a dataframe with metadata about source
 #' entities, or the response of the GET request, depending on the boolean value
 #' set for \code{return_response}.
 #'
 #' @examples
-#' \donttest{
-#' client.id <- "<YOUR CLIENT ID>"
+#' \dontrun{
+#' frost_client_id <- "<YOUR FROST CLIENT ID>"
 #'
 #' # Get data for all sources
-#' sources <- get_sources(client_id = client.id)
+#' sources <- get_sources(client_id = frost_client_id)
 #'
 #' # Get data for sources in Norway
-#' sources.norway <- get_sources(client.id = client.id,
-#'                               country = "NO")
+#' sources_norway <- get_sources(client_id = frost_client_id,
+#'                               country   = "NO")
 #' }
 #'
 #' @export get_sources
@@ -152,9 +152,9 @@ get_sources <-
       paste0("https://", client_id, "@frost.met.no/sources/v0.jsonld",
              collapse = NULL)
 
-    frostr_ua <- httr::user_agent("https://github.com/PersianCatsLikeToMeow/frostr")
+    frostr_ua <- httr::user_agent("https://github.com/imangR/frostr")
 
-    r <- httr::GET(url, query = input_args, frostr_ua)
+    r <- httr::GET(url, frostr_ua, query = input_args)
 
     httr::stop_for_status(r)
     frost_stop_for_type(r)
@@ -164,6 +164,6 @@ get_sources <-
     r_content <- httr::content(r, as = "text", encoding = "UTF-8")
     r_json <- jsonlite::fromJSON(r_content, flatten = TRUE)
 
-    r_data <- tibble::as_tibble(r_json[["data"]])
+    tibble::as_tibble(r_json[["data"]])
 
   }
