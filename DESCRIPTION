@@ -4,11 +4,11 @@ Title: R API to MET Norway's 'Frost' API
 Version: 0.2.0
 Authors@R: person("Iman", "Ghayoornia", email = "ghayoornia.iman@gmail.com",
   role = c("aut", "cre"))
-Description: An R API to MET Norway's 
-    'Frost' API <https://frost.met.no/index2.html> to retrieve data as data frames. 
-    The 'Frost' API, and the underlying data, is made available by the
-    Norwegian Meteorological Institute (MET Norway). The data and products are 
-    distributed under the Norwegian License for Open Data 2.0 (NLOD) <https://data.norge.no/nlod/en/2.0>
+Description: An R API to MET Norway's 'Frost' API <https://frost.met.no/index.html> 
+    to retrieve data as data frames. The 'Frost' API, and the underlying data, is 
+    made available by the Norwegian Meteorological Institute (MET Norway). The data
+    and products are distributed under the 
+    Norwegian License for Open Data 2.0 (NLOD) <https://data.norge.no/nlod/en/2.0>
     and Creative Commons 4.0 <https://creativecommons.org/licenses/by/4.0/>.
 License: MIT + file LICENSE
 Encoding: UTF-8
