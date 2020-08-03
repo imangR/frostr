@@ -13,7 +13,9 @@ knitr::opts_chunk$set(
 # frostr
 
 <!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/frostr)](https://cran.r-project.org/package=frostr)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/imangR/frostr/blob/master/LICENSE)
+[![downloads](http://cranlogs.r-pkg.org/badges/grand-total/frostr)](https://cran.r-project.org/package=frostr)
 <!-- badges: end -->
 
 ## Overview
