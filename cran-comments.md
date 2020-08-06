@@ -1,13 +1,9 @@
 ## Resubmission
-This is a resubmission to make the frostr package active again, since it has been archived.
+This is a resubmission.
 
 In this version, I have
 
-* updated description in DESCRIPTION
-* put single quotes (') around API names in DESCRIPTION (there is no software or package names in the updated description text)
-* replaced \donttest{} with \dontrun{} in Rd-files (wrong use of \donttest{} is what made the package archived)
-* updated calls to `httr::GET` to use a specified user agent where it previously used `httr`'s default user agent
-* updated documentation text for each `get_*` function
+* added URL and BugReports link in DESCRIPTION that links to the package's GitHub repository;
 
 ## Test environments
 * local Windows  install, R 4.0.2
