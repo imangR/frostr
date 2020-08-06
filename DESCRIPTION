@@ -1,9 +1,11 @@
 Package: frostr
 Type: Package
 Title: R API to MET Norway's 'Frost' API
-Version: 0.2.0
+Version: 0.3.9000
 Authors@R: person("Iman", "Ghayoornia", email = "ghayoornia.iman@gmail.com",
   role = c("aut", "cre"))
+URL: http://github.com/imangR/frostr
+BugReports: http://github.com/imangR/frostr/issues
 Description: An R API to MET Norway's 'Frost' API <https://frost.met.no/index.html> 
     to retrieve data as data frames. The 'Frost' API, and the underlying data, is 
     made available by the Norwegian Meteorological Institute (MET Norway). The data
