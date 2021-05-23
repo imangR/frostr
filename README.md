@@ -3,19 +3,24 @@
 
 # frostr
 
+# dplyr <a href='https://github.com/imangR/frostr'><img src='man/figures/frostr_logo.svg' align="right" height="139" /></a>
+
 <!-- badges: start -->
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/frostr)](https://cran.r-project.org/package=frostr)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/imangR/frostr/blob/master/LICENSE)
+[![Inactively
+Maintained](https://img.shields.io/badge/Maintenance%20Level-Inactively%20Maintained-yellowgreen.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
 [![downloads](http://cranlogs.r-pkg.org/badges/grand-total/frostr)](https://cran.r-project.org/package=frostr)
+
 <!-- badges: end -->
 
 ## Overview
 
-frostr is an unofficial R API to MET Norway’s Frost API. The package
-provides functions that retrieves data from resources in the Frost API
-to R as data frames.
+frostr is an unofficial R API to MET Norway’s Frost API, which provides
+historical weather and climate data. The package provides functions that
+retrieves data from resources in the Frost API to R as data frames.
 
 The functions are
 
