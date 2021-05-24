@@ -1,9 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# frostr
-
-# dplyr <a href='https://github.com/imangR/frostr'><img src='man/figures/frostr_logo.svg' align="right" height="139" /></a>
+# frostr <a href='https://github.com/imangR/frostr'><img src='man/figures/frostr_logo.svg' align="right" height="139" /></a>
 
 <!-- badges: start -->
 

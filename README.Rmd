@@ -10,9 +10,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# frostr
-
-# dplyr <a href='https://github.com/imangR/frostr'><img src='man/figures/frostr_logo.svg' align="right" height="139" /></a>
+# frostr <a href='https://github.com/imangR/frostr'><img src='man/figures/frostr_logo.svg' align="right" height="139" /></a>
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/frostr)](https://cran.r-project.org/package=frostr)
